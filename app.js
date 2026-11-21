@@ -113,7 +113,7 @@ async function loadPoints(){
 }
 function adaptRide(r){return{id:r.id,r:r.route,t:r.t,tt:r.tt||{},pts:r.pts||[],dr:r.dr,seats:r.seats,left:r.left,price:r.price,car:r.car,col:r.col,pl:r.plate,who:r.who||(NAMES[r.driver_id]||'سواق'),w:r.women,days:r.days,vb:r.vb||[],ar:r.ar,mine:r.driver_id===ME,demo:r.is_demo,driver:r.driver_id,st:r.status}}
 async function loadNames(ids){ids=[...new Set(ids.filter(Boolean))];if(!ids.length)return;
-  const{data}=await sb.from('profiles').select('id,name').in('id',ids);
+  const{data}=await sb.from('public_profile_names').select('id,name').in('id',ids);
   (data||[]).forEach(p=>{NAMES[p.id]=p.name});
   ids.forEach(id=>{delete VFD[id];delete RT_SUM[id]});
   try{const{data:dv,error}=await sb.from('driver_verification_status').select('driver_id,status').in('driver_id',ids).eq('status','approved');if(!error)(dv||[]).forEach(x=>{if(x.status==='approved')VFD[x.driver_id]='approved'})}catch(e){}
