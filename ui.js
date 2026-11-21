@@ -14,6 +14,16 @@ Object.assign(UI_COPY,{
  'وثّق حسابك وخد شارة وحجوزات أكتر':['أرسل مستنداتك للمراجعة للحصول على شارة التوثيق','Submit your documents for review to earn a verified badge']
 });
 
+Object.assign(UI_COPY,{
+ 'حدد وجهتك وهنوريك أقرب المشاوير ليك':['حدد وجهتك وهنوريك أقرب المشاوير ليك','Pick your destination and see the closest rides'],
+ '· تلقائي':['· تلقائي',' · auto'],
+ 'استخدم موقعي الحالي':['استخدم موقعي الحالي','Use my current location'],
+ 'حددنا موقعك:':['حددنا موقعك:','Location set:'],
+ 'موقعك بره مناطق المشاوير الحالية. اختار نقطة الركوب بنفسك.':['موقعك بره مناطق المشاوير الحالية. اختار نقطة الركوب بنفسك.','You are outside the current ride areas. Pick your pickup point yourself.'],
+ 'المتصفح مش بيدعم تحديد الموقع.':['المتصفح مش بيدعم تحديد الموقع.','This browser does not support location.'],
+ 'الموقع مقفول من إعدادات المتصفح. افتحه وجرب تاني.':['الموقع مقفول من إعدادات المتصفح. افتحه وجرب تاني.','Location is blocked in the browser settings. Allow it and try again.'],
+ 'مش قادرين نحدد موقعك دلوقتي. جرب تاني.':['مش قادرين نحدد موقعك دلوقتي. جرب تاني.','We could not detect your location right now. Try again.']
+});
 let UI_LANG = localStorage.getItem('meshwar-language') === 'en' ? 'en' : 'ar';
 const uiEscape = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 const uiKeys = Object.keys(UI_COPY).sort((a,b)=>b.length-a.length);

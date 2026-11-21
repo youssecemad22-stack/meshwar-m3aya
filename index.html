@@ -385,6 +385,26 @@ details.ad{flex-basis:100%;margin-top:6px}details.ad summary{cursor:pointer;font
 #pwa-help::backdrop{background:rgba(0,0,0,.55)}#pwa-help h2{margin-top:0}#pwa-help p{line-height:1.9}#pwa-help button{width:100%}
 @media(display-mode:standalone){#pwa-install{display:none!important}}
 
+
+/* ===== location-first home ===== */
+.w2go{width:100%;display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--soft);color:var(--tx);border:1.5px solid var(--bd);border-radius:16px;min-height:58px;padding:0 16px;font:800 17px Cairo,sans-serif;text-align:start;transition:border-color .15s,transform .15s}
+.w2go:active{transform:scale(.985);border-color:var(--ac)}
+.w2go .w2ph{color:var(--mu);font-weight:700}
+.w2go>svg,.w2go .w2ic svg{width:20px;height:20px;color:var(--ac);flex:none}
+.w2go .w2sel{color:var(--ac);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:800}
+.frow{display:flex;align-items:center;gap:10px}
+.frow .hc{flex:1;min-width:0;display:flex;align-items:center;gap:8px;border-bottom:0;padding:0}
+.frow .hc small{color:var(--mu);font-size:12px;margin:0;position:static}
+.frow .pk{flex:1;min-width:0;justify-content:flex-start;min-height:36px!important}
+.frow .pk .au{color:var(--ac);font-size:11px;font-style:normal;font-weight:600}
+.locb{flex:none;width:42px;height:42px;border-radius:50%;border:1px solid var(--bd);background:var(--card);color:var(--ac);display:flex;align-items:center;justify-content:center}
+.locb:active{transform:scale(.92)}
+.locb.spin svg{animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.frow .sw{position:static;width:42px;height:42px;flex:none;background:var(--soft);color:var(--ac);box-shadow:none}
+.frow .sw svg{width:16px}
+.nav{overflow-x:auto;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
 </style>
 </head>
 <body>
@@ -401,9 +421,9 @@ details.ad{flex-basis:100%;margin-top:6px}details.ad summary{cursor:pointer;font
 <div><strong id="pwa-install-title"></strong><p id="pwa-install-copy"></p><div class="pwa-actions"><button id="pwa-install-action" class="btn" type="button"></button><button id="pwa-install-later" class="btn g" type="button"></button></div></div>
 </aside>
 <section id="v1">
-<div id="nx"></div><div class="hero"><div><b id="gr"></b><span class="hs">رايح فين النهارده؟ اختار ركوبك ونزولك</span></div><div class="hf"><div class="hc"><small>من</small><button class="pk" id="pk1" onclick="pkr(1)"></button>
-<select id="f" aria-label="نقطة الركوب" onchange="skl()"></select>
-</div><button class="sw" aria-label="مسح الاختيارات" onclick="clr()"><svg viewBox="0 0 24 24" width="22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button><div class="hc"><small>إلى</small><button class="pk" id="pk2" onclick="pkr(2)"></button><select id="df" aria-label="نقطة النزول" onchange="skl()"></select></div></div></div>
+<div id="nx"></div><div class="hero"><div><b id="gr"></b><span class="hs">حدد وجهتك وهنوريك أقرب المشاوير ليك</span></div>
+<button class="w2go" id="pk2" onclick="pkr(2)"></button>
+<div class="frow"><button class="locb" id="locb" aria-label="استخدم موقعي الحالي" onclick="geoLocate(true)"><svg viewBox="0 0 24 24" width="19" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 0 1 14 0Z"/><circle cx="12" cy="10" r="2.5"/></svg></button><div class="hc"><small>من</small><button class="pk" id="pk1" onclick="pkr(1)"></button><select id="f" aria-label="نقطة الركوب" onchange="skl()"></select></div><button class="sw" aria-label="مسح الاختيارات" onclick="clr()"><svg viewBox="0 0 24 24" width="22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button><div class="hc" hidden><small>إلى</small><select id="df" aria-label="نقطة النزول" onchange="skl()"></select></div></div></div>
 <label style="display:flex;align-items:center;gap:8px;font-weight:400"><input id="wf" type="checkbox" style="width:20px;min-height:20px" onchange="skl()">مشاوير للسيدات فقط</label>
 <div class="promo" id="promo"></div>
 <div class="sr" id="sr" role="group" aria-label="ترتيب"></div>
