@@ -1,0 +1,537 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>مشوار معايا | مشاركة مشاوير الهرم ← زايد</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap">
+<style>
+:root{--bg:#F6F4EF;--card:#fff;--bd:#E2DED4;--tx:#1B1B1B;--mu:#5A5A5A;--ac:#0F766E;--on:#fff;--soft:#E3F2F0;--er:#B91C1C;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#14171A;--card:#1E2327;--bd:#2F363C;--tx:#ECEDEE;--mu:#A9B1B8;--ac:#2DD4BF;--on:#06201D;--soft:#17312F;--er:#F87171}}
+:root[data-theme="dark"]{--bg:#14171A;--card:#1E2327;--bd:#2F363C;--tx:#ECEDEE;--mu:#A9B1B8;--ac:#2DD4BF;--on:#06201D;--soft:#17312F;--er:#F87171}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:Cairo,system-ui,sans-serif;font-size:16px}
+.w{max-width:480px;margin:0 auto;padding:16px}
+h1{margin:0;font-size:22px;white-space:nowrap}h2{margin:16px 0 4px;font-size:18px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.chip{background:var(--soft);color:var(--tx);border-radius:16px;padding:4px 12px;font-weight:700;font-size:14px;white-space:nowrap}
+.tabs{display:flex;gap:8px;margin:12px 0}
+.tabs button{flex:1;height:46px;border-radius:12px;border:2px solid var(--bd);background:var(--card);color:var(--tx);font:700 16px Cairo,sans-serif}
+.tabs button[aria-selected="true"]{background:var(--ac);color:var(--on);border-color:var(--ac)}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:12px;margin:10px 0;display:flex;flex-direction:column;gap:6px}
+.row{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.mu{color:var(--mu);font-size:14px}
+.pr{color:var(--ac);font-weight:700;font-size:18px}
+.dot{display:inline-block;width:10px;height:10px;border-radius:5px;margin-left:6px}
+.pl{align-self:flex-start;border:2px solid #1D4ED8;border-radius:8px;padding:0 10px;font-weight:700;font-size:17px;letter-spacing:1px}
+.btn{background:var(--ac);color:var(--on);border:0;border-radius:12px;min-height:44px;padding:0 18px;font:700 16px Cairo,sans-serif;cursor:pointer}
+.btn:disabled{opacity:.5}
+.btn.g{background:transparent;color:var(--tx);border:2px solid var(--bd)}
+label{display:block;font-weight:700;font-size:14px;margin:8px 0 4px}
+input,select{width:100%;box-sizing:border-box;min-height:44px;background:var(--card);color:var(--tx);border:1px solid var(--bd);border-radius:12px;padding:8px 12px;font:400 16px Cairo,sans-serif}
+.pts{display:flex;gap:12px;flex-wrap:wrap}.pts label{display:flex;align-items:center;gap:6px;font-weight:400;margin:0}.pts input{width:20px;min-height:20px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+#mapw{border-radius:14px;overflow:hidden;background:#EAE6DA;margin:10px 0}#mapw svg{display:block;width:100%;height:130px}
+.rt,.cr{transition:opacity .3s}
+#toast{position:fixed;left:16px;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));max-width:448px;margin:0 auto;background:var(--tx);color:var(--bg);border-radius:12px;padding:12px 16px;font-weight:700;display:none;z-index:5}
+.er{color:var(--er);font-weight:700;min-height:22px}
+body{padding-bottom:calc(72px + env(safe-area-inset-bottom,0px))}
+.nav{position:fixed;bottom:0;left:0;right:0;display:flex;background:var(--card);border-top:1px solid var(--bd);padding-bottom:env(safe-area-inset-bottom,0px);z-index:4}
+.nav button{flex:1;min-height:56px;border:0;background:transparent;color:var(--mu);font:700 13px Cairo,sans-serif;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
+.nav button[aria-selected="true"]{color:var(--ac)}
+@keyframes pulse{0%{transform:scale(.6);opacity:.8}100%{transform:scale(2.2);opacity:0}}
+@keyframes up{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes drive{from{right:0}to{right:85%}}
+#rides .card,#books .card{animation:up .3s both}
+.radar{position:relative;width:80px;height:80px;margin:20px auto}.radar i{position:absolute;inset:0;border-radius:50%;border:3px solid var(--ac);animation:pulse 1.6s infinite}.radar i:nth-child(2){animation-delay:.5s}.radar b{position:absolute;inset:28px;border-radius:50%;background:var(--ac)}
+.road{position:relative;height:40px;border-bottom:3px dashed var(--bd);margin:8px 0}.road span{position:absolute;bottom:-4px;font-size:28px;transition:right 1s linear}.drv{animation:drive 8s linear infinite}
+.pin{font-size:34px;font-weight:700;letter-spacing:8px;text-align:center;background:var(--soft);border-radius:12px;padding:6px}
+.sos{background:#B91C1C;color:#fff}
+.stars{display:flex;gap:4px}.stars button{font-size:30px;background:transparent;border:0;min-width:44px;min-height:44px;color:#D97706}
+@keyframes sheet{from{transform:translateY(100%)}}
+@keyframes drive2{from{transform:translateX(120px)}to{transform:none}}
+#bk:not(:empty){position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:6;display:flex;align-items:flex-end}
+#bk>.card{width:100%;max-width:480px;margin:0 auto;border-radius:20px 20px 0 0;padding:16px 16px calc(16px + env(safe-area-inset-bottom,0px));animation:sheet .3s}
+#sp{position:fixed;inset:0;background:var(--ac);color:var(--on);z-index:9;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;font-size:28px;font-weight:700;transition:opacity .5s}
+#sp span{font-size:56px;animation:drive2 1.2s ease-out}
+.seat{letter-spacing:2px;color:var(--ac)}
+.cm{display:flex;flex-wrap:wrap;gap:6px}.cm button{border:1px solid var(--bd);background:var(--card);color:var(--tx);border-radius:16px;padding:6px 12px;font:400 14px Cairo,sans-serif;min-height:36px}
+.msg{background:var(--soft);border-radius:10px;padding:6px 10px;font-size:14px;align-self:flex-start}.msg.me{align-self:flex-end}
+.pp2{display:flex;justify-content:space-between;align-items:center;width:100%;text-align:right;border:2px solid var(--bd);background:var(--card);color:var(--tx);border-radius:12px;padding:10px 12px;margin-bottom:6px;font:400 15px Cairo,sans-serif;min-height:56px}
+.pp2[aria-pressed="true"]{border-color:var(--ac);background:var(--soft)}
+.tick{width:24px;height:24px;border-radius:50%;border:2px solid var(--bd);flex:none}
+.pp2[aria-pressed="true"] .tick{background:var(--ac);border-color:var(--ac);box-shadow:inset 0 0 0 4px var(--soft)}
+.tl{display:flex;gap:10px;align-items:flex-start;padding:7px 0;border-bottom:1px dashed var(--bd)}.tl:last-child{border:0}
+.tl i{width:16px;height:16px;border-radius:50%;border:3px solid var(--bd);margin-top:4px;flex:none;background:var(--card)}
+.tl.done i{background:var(--ac);border-color:var(--ac)}.tl.now i{border-color:var(--ac);box-shadow:0 0 0 4px var(--soft)}
+.tl.me{background:var(--soft);border-radius:10px;padding:7px 8px}
+.stp{display:flex;gap:4px;margin:4px 0}.stp span{flex:1;height:6px;border-radius:3px;background:var(--bd)}.stp span.on{background:var(--ac)}
+.tg{display:flex;flex-wrap:wrap;gap:6px}.tg button{border:2px solid var(--bd);background:var(--card);color:var(--tx);border-radius:16px;padding:6px 12px;font:400 14px Cairo,sans-serif;min-height:40px}.tg button[aria-pressed="true"]{border-color:var(--ac);background:var(--soft)}
+.ban{display:flex;justify-content:space-between;align-items:center;gap:12px;border-radius:18px;padding:16px;color:#fff;margin-bottom:10px;transition:background .6s}.ban b{font-size:20px;display:block}.ban small{font-size:14px}
+.b1{background:linear-gradient(135deg,#0F766E,#0B4F4A)}.b2{background:linear-gradient(135deg,#C2410C,#9A3412)}.b3{background:linear-gradient(135deg,#2563EB,#1E3A8A)}.b4{background:linear-gradient(135deg,#15803D,#14532D)}
+.ring{flex:none}.ring text{fill:#fff;font:700 18px Cairo,sans-serif}
+.tsh{background:var(--card);border:1px solid var(--bd);border-radius:24px 24px 0 0;margin-top:-14px;position:relative;padding:16px;display:flex;flex-direction:column;gap:10px}
+.av{width:44px;height:44px;border-radius:50%;color:#fff;font:700 20px Cairo,sans-serif;display:flex;align-items:center;justify-content:center;flex:none}
+.pins{display:flex;gap:8px;justify-content:center;direction:ltr}.pins b{width:52px;height:60px;border-radius:12px;background:var(--soft);display:flex;align-items:center;justify-content:center;font-size:30px;animation:pop .5s both}
+@keyframes pop{from{transform:scale(.4);opacity:0}to{transform:none;opacity:1}}
+@keyframes pulse3{from{transform:scale(1);opacity:1}to{transform:scale(2.6);opacity:0}}
+.pul{transform-box:fill-box;transform-origin:center;animation:pulse3 1.4s ease-out infinite}
+@keyframes fall{from{transform:translateY(-20px) rotate(0);opacity:1}to{transform:translateY(560px) rotate(540deg);opacity:0}}
+.cf{display:block;position:fixed;top:0;width:10px;height:14px;border-radius:2px;animation:fall 2.6s ease-in forwards;z-index:7}
+.btn{transition:transform .12s}.btn:active{transform:scale(.97)}
+.w section:not([hidden]){animation:fade .3s}@keyframes fade{from{opacity:0;transform:translateY(8px)}}
+.lg{width:34px;height:34px;border-radius:10px;background:var(--ac);color:var(--on);display:inline-flex;align-items:center;justify-content:center}
+.hero{background:linear-gradient(135deg,#0F766E,#0B4F4A);color:#fff;border-radius:22px;padding:16px;margin:12px 0;position:relative;overflow:hidden;display:flex;flex-direction:column;gap:12px}
+.hero:before{content:"";position:absolute;width:180px;height:180px;border-radius:50%;border:26px solid rgba(255,255,255,.07);top:-70px;left:-50px}
+.hero b{font-size:20px}.hs{display:block;opacity:.9;font-size:14px}
+.hf{display:flex;gap:8px;align-items:flex-end;position:relative}.hc{flex:1;min-width:0}.hc small{opacity:.9;display:block;margin-bottom:4px}
+.hero select{background:rgba(255,255,255,.18);color:#fff;border:0;font-weight:700}.hero option,.hero optgroup{color:#1B1B1B}
+.sw{width:44px;height:44px;border-radius:50%;border:0;background:#fff;color:#0F766E;flex:none;display:flex;align-items:center;justify-content:center}
+.sr{display:flex;gap:6px;overflow-x:auto;margin:6px 0}.sr button{flex:none;border:2px solid var(--bd);background:var(--card);color:var(--tx);border-radius:18px;padding:6px 14px;font:700 14px Cairo,sans-serif;min-height:40px}.sr button[aria-pressed="true"]{background:var(--ac);color:var(--on);border-color:var(--ac)}
+.rc{gap:8px}.av.sm{width:38px;height:38px;font-size:17px}
+.bd{display:flex;gap:6px;flex-wrap:wrap}.bd span{font-size:12px;font-weight:700;border-radius:10px;padding:2px 8px;background:var(--soft);color:var(--tx)}.bd .w2{background:#FEF3C7;color:#78350F}
+.pills{display:flex;gap:6px;overflow-x:auto;padding-bottom:2px}.pill{flex:none;border:1px solid var(--bd);border-radius:12px;padding:4px 10px;text-align:center;font-size:13px}.pill b{display:block;font-size:15px}.pill.on{background:var(--soft);border-color:var(--ac)}
+.seats{display:flex;gap:2px}.seats svg{width:20px;height:20px;fill:var(--ac)}.seats svg.e{fill:var(--bd)}
+.sk{height:150px;border-radius:14px;margin:10px 0;background:linear-gradient(90deg,var(--card) 25%,var(--soft) 50%,var(--card) 75%);background-size:200% 100%;animation:shim 1s infinite}@keyframes shim{to{background-position:-200% 0}}
+.nav svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}.nav button[aria-selected="true"] svg{background:var(--soft);padding:3px 16px;box-sizing:content-box;border-radius:14px}
+#ob[hidden]{display:none}
+#ob{position:fixed;inset:0;z-index:20;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:32px;text-align:center}
+.ob svg{width:130px;height:auto}.ob i{display:inline-block;animation:bob 1.4s ease-in-out infinite}@keyframes bob{50%{transform:translateY(-12px)}}
+.dots{display:flex;gap:6px}.dots span{width:8px;height:8px;border-radius:4px;background:var(--bd);transition:all .3s}.dots span.on{width:24px;background:var(--ac)}
+.nx{display:flex;justify-content:space-between;align-items:center;gap:8px;background:var(--soft);border:1px solid var(--ac);border-radius:16px;padding:10px 14px;margin-top:12px}
+.vf button{border:2px solid var(--bd);background:var(--card);color:var(--tx);border-radius:12px;padding:8px 12px;font:700 14px Cairo,sans-serif;min-height:44px;flex:1}.vf button[aria-pressed="true"]{border-color:var(--ac);background:var(--soft)}
+.bellb{position:relative;width:40px;height:40px;border-radius:50%;border:2px solid var(--bd);background:var(--card);color:var(--tx);display:flex;align-items:center;justify-content:center;padding:0}.bellb svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.bellb i{position:absolute;top:-4px;left:-4px;min-width:18px;height:18px;border-radius:9px;background:#B91C1C;color:#fff;font:700 11px Cairo,sans-serif;font-style:normal;display:flex;align-items:center;justify-content:center;padding:0 4px}.bellb i[hidden]{display:none}
+.ws{display:flex;flex-direction:column;gap:10px;max-height:90vh}.wb{overflow:auto;display:flex;flex-direction:column;gap:12px;padding:2px}
+.wh{background:linear-gradient(135deg,#0F766E,#0B4F4A);color:#fff;border-radius:18px;padding:14px;display:flex;justify-content:space-between;align-items:center}.wh b{font-size:32px}.wh small{opacity:.9;font-size:13px}
+.wt{display:flex;gap:6px;background:var(--soft);border-radius:14px;padding:4px}.wt button{flex:1;border:0;border-radius:10px;min-height:40px;background:transparent;color:var(--tx);font:700 15px Cairo,sans-serif}.wt button[aria-pressed="true"]{background:var(--card);box-shadow:0 1px 3px rgba(0,0,0,.18)}
+.sp{display:flex;align-items:center;gap:6px}.sp span{width:26px;height:26px;border-radius:50%;border:2px solid var(--bd);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex:none}.sp span.on{background:var(--ac);border-color:var(--ac);color:var(--on)}.sp i{flex:1;height:3px;background:var(--bd);border-radius:2px}.sp i.on{background:var(--ac)}
+.am{display:grid;grid-template-columns:1fr 1fr;gap:8px}.am button{min-height:64px;border:2px solid var(--bd);border-radius:14px;background:var(--card);color:var(--tx);font:700 20px Cairo,sans-serif}.am button[aria-pressed="true"]{border-color:var(--ac);background:var(--soft)}
+.wf{display:flex;gap:8px}.wf .btn{flex:1}
+.up{display:flex;flex-direction:column;align-items:center;gap:6px;border:2px dashed var(--bd);border-radius:16px;padding:22px;text-align:center;cursor:pointer}.up input{display:none}
+.cp{display:flex;justify-content:space-between;align-items:center;background:var(--soft);border-radius:12px;padding:10px 12px;font-weight:700;letter-spacing:1px}
+.okc{width:72px;height:72px;border-radius:50%;background:var(--ac);color:var(--on);display:flex;align-items:center;justify-content:center;margin:8px auto;animation:pop .5s both}
+.wk{display:flex;gap:6px}.wk button{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;border:2px solid var(--bd);background:var(--card);color:var(--tx);border-radius:14px;padding:8px 0;font:700 14px Cairo,sans-serif;min-height:68px}.wk button[aria-pressed="true"]{border-color:var(--ac);background:var(--soft)}.wk i{width:8px;height:8px;border-radius:50%;background:var(--bd)}.wk i.on{background:var(--ac)}.wk small{font-size:10px;color:var(--ac);font-weight:700}
+.rt{display:flex;align-items:center;gap:12px;padding:4px 0}.rt b{font-size:15px}.rt i{flex:1;height:4px;border-radius:2px;position:relative}.rt i:before,.rt i:after{content:"";position:absolute;top:-3px;width:10px;height:10px;border-radius:50%;background:inherit}.rt i:before{left:-3px}.rt i:after{right:-3px}
+#v2:not([hidden]){display:flex;flex-direction:column}
+#v2>:nth-child(1){order:0}#v2>:nth-child(5){order:1}#v2>:nth-child(8){order:2}#v2>:nth-child(6){order:3}#v2>:nth-child(7){order:4}#v2>:nth-child(2){order:5}#v2>:nth-child(3){order:6}#v2>:nth-child(4){order:7}
+#v2.cl>:nth-child(3),#v2.cl>:nth-child(4){display:none}
+.ps{display:none}.ps.on{display:block}
+.hero select{display:none}
+.pk{width:100%;text-align:right;background:rgba(255,255,255,.18);color:#fff;border:0;border-radius:12px;min-height:44px;padding:8px 12px;font:700 15px Cairo,sans-serif;display:flex;align-items:center;justify-content:space-between;gap:6px}.pk span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.promo{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;margin:4px 0}.pc{flex:none;width:230px;scroll-snap-align:start;border-radius:18px;padding:14px;color:#fff;display:flex;flex-direction:column;gap:4px;border:0;text-align:right;font-family:Cairo,sans-serif}.pc b{font-size:16px}.pc span{font-size:13px}
+.fq{border-top:1px solid var(--bd);padding:10px 0}.fq summary{font-weight:700;cursor:pointer}.fq p{margin:6px 0 0}
+textarea{width:100%;box-sizing:border-box;background:var(--card);color:var(--tx);border:1px solid var(--bd);border-radius:12px;padding:10px 12px;font:400 16px Cairo,sans-serif}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="w">
+<div class="top"><h1 style="display:flex;align-items:center;gap:8px"><span class="lg"><svg viewBox="0 0 64 30" width="24" fill="currentColor" aria-hidden="true"><path d="M4 20V15Q4 12 8 11L16 10L22 3Q23 2 25 2H41Q43 2 44 3L50 10L58 12Q61 13 61 16V20Q61 22 59 22H5Q4 22 4 20Z"/><circle cx="17" cy="24" r="5"/><circle cx="48" cy="24" r="5"/></svg></span>مشوار معايا</h1><div style="display:flex;align-items:center;gap:8px"><button class="chip" style="border:0;font-family:inherit;color:inherit;cursor:pointer" aria-label="المحفظة" onclick="wal()">الرصيد: <span id="bal"></span> جنيه</button><button class="bellb" aria-label="الإشعارات" onclick="nsh()"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9a6 6 0 0112 0c0 6 2 7 2 7H4s2-1 2-7"/><path d="M10 20a2 2 0 004 0"/></svg><i id="bdg" hidden></i></button></div></div>
+<p class="mu" style="margin:4px 0 0">مشاركة مشاوير الهرم ← زايد · نسخة أولى مباشرة</p>
+
+<div id="mapw"></div>
+
+<section id="v1">
+<div id="nx"></div><div class="hero"><div><b id="gr"></b><span class="hs">رايح زايد النهارده؟ اختار ركوبك ونزولك</span></div><div class="hf"><div class="hc"><small>من</small><button class="pk" id="pk1" onclick="pkr(1)"></button>
+<select id="f" aria-label="نقطة الركوب" onchange="skl()"></select>
+</div><button class="sw" aria-label="مسح الاختيارات" onclick="clr()"><svg viewBox="0 0 24 24" width="22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button><div class="hc"><small>إلى</small><button class="pk" id="pk2" onclick="pkr(2)"></button><select id="df" aria-label="نقطة النزول في زايد" onchange="skl()"></select></div></div></div>
+<label style="display:flex;align-items:center;gap:8px;font-weight:400"><input id="wf" type="checkbox" style="width:20px;min-height:20px" onchange="skl()">مشاوير للسيدات فقط</label>
+<div class="promo" id="promo"></div>
+<div class="sr" id="sr" role="group" aria-label="ترتيب"></div>
+
+<h2>المشاوير المتاحة</h2><div id="rides"></div>
+<h2>حجوزاتي</h2><div id="books"></div>
+</section>
+
+<section id="v2" class="cl" hidden>
+<button class="btn" id="cta" onclick="tg2()">+ انشر مشوار جديد</button><div id="vfc"></div><h2>انشر مشوارك</h2>
+<div class="card">
+<div id="psh"></div><div class="ps on" data-s="1"><label for="who">اسمك</label><input id="who" placeholder="الاسم">
+<label for="car">الماركة والموديل</label><input id="car" placeholder="مثلاً: هيونداي إلنترا">
+<div class="g2"><div><label for="col">اللون</label><select id="col"><option>أبيض</option><option>أسود</option><option>فضي</option><option>رمادي</option><option>أزرق</option><option>أحمر</option></select></div><div><label for="pl">رقم اللوحة</label><input id="pl" placeholder="حروف وأرقام"></div></div>
+</div><div class="ps" data-s="2"><label for="rt">الطريق</label><select id="rt" onchange="hl(this.value)"></select>
+<label for="dr">نقطة النزول في زايد</label><select id="dr"></select>
+<div class="g2"><div><label for="time">الميعاد عند أول نقطة ركوب</label><input id="time" type="time" value="07:30" oninput="man={};ttRender()"></div><div><label for="seats">المقاعد</label><input id="seats" type="number" min="1" max="4" value="3"></div></div>
+<label for="price">سعر المقعد (جنيه)</label><input id="price" type="number" min="5" value="45" oninput="cm()">
+<span class="mu" id="cmt"></span>
+<label>نقاط التجمع</label><div class="pts" id="pp"></div><button class="btn g" type="button" style="margin-top:8px" onclick="cpf('d')">+ مكان تاني على طريقك</button>
+<div id="tt"></div>
+</div><div class="ps" data-s="3"><label>أيام تكرار المشوار</label><div class="pts"><label><input class="dy" type="checkbox" value="0" checked>أحد</label><label><input class="dy" type="checkbox" value="1" checked>اثنين</label><label><input class="dy" type="checkbox" value="2" checked>ثلاثاء</label><label><input class="dy" type="checkbox" value="3" checked>أربعاء</label><label><input class="dy" type="checkbox" value="4" checked>خميس</label><label><input class="dy" type="checkbox" value="5">جمعة</label><label><input class="dy" type="checkbox" value="6">سبت</label></div>
+<label style="display:flex;align-items:center;gap:8px;font-weight:400"><input id="wo" type="checkbox" style="width:20px;min-height:20px">مشوار للسيدات فقط (سواقة وراكبات)</label>
+<label>أجواء المشوار</label><div class="tg" id="vb"></div>
+<div class="er" id="er" role="alert"></div>
+</div><div class="wf" style="margin-top:12px"><button class="btn g" id="pb" onclick="pgo(-1)">رجوع</button><button class="btn" id="pn2" onclick="pgo(1)">التالي</button></div>
+</div>
+<div id="stat"></div><h2>مشاويري</h2><div id="mine"></div>
+<div class="card"><b>رصيد العمولة</b><span class="mu">الرصيد بيتخصم منه عمولة 15% لما كل راكب يركب فعلاً، على السعر المتفق عليه. الدفع بين الراكب والسواق كاش. مش محفظة للسحب.</span><button class="btn" onclick="wal()">اشحن رصيدك</button></div>
+</section>
+
+<section id="v3" hidden><h2>رحلتي</h2><p class="mu" style="margin:-4px 0 8px">حجوزاتك وجدولك الأسبوعي وتتبع الرحلة في مكان واحد</p><div id="trip"></div></section>
+<section id="v5" hidden><h2>حسابي</h2><div id="prof"></div></section>
+<section id="v4" hidden><h2>سجل مشاويري</h2><div id="hist"></div></section>
+<p class="mu">المشاوير والحجوزات دلوقتي حقيقية ومتشاركة بين كل المستخدمين. المشاوير المعلمة "موثّق ✓" من كباتن جربوا التطبيق. الخريطة رسم تقريبي مش بالمقياس.</p>
+<button class="btn g" onclick="reset()">تسجيل الخروج من الجهاز ده</button>
+</div>
+<div id="bk" onclick="if(event.target===this)closeBk()"></div>
+<div id="ob" hidden></div><svg style="display:none" aria-hidden="true"><symbol id="pe" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7z"/></symbol></svg>
+<div id="sp"><span aria-hidden="true"><svg viewBox="0 0 64 30" width="140" style="display:block;transform:scaleX(-1)"><path d="M4 20V15Q4 12 8 11L16 10L22 3Q23 2 25 2H41Q43 2 44 3L50 10L58 12Q61 13 61 16V20Q61 22 59 22H5Q4 22 4 20Z" fill="currentColor"/><path d="M24 4H41L47 10H19Z" fill="var(--ac)"/><circle cx="17" cy="23" r="5.5" fill="#1B1B1B"/><circle cx="17" cy="23" r="2" fill="#fff"/><circle cx="48" cy="23" r="5.5" fill="#1B1B1B"/><circle cx="48" cy="23" r="2" fill="#fff"/></svg></span>مشوار معايا</div>
+<nav class="nav" role="tablist"><button role="tab" id="n1" aria-selected="true" onclick="tab(1)"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>مشاوير</button><button role="tab" id="n3" aria-selected="false" onclick="tab(3)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6 7-11a7 7 0 10-14 0c0 5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>رحلتي</button><button role="tab" id="n2" aria-selected="false" onclick="tab(2)"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="2"/><path d="M12 14v7M3.5 10.5L10 12M20.5 10.5L14 12"/></svg>سواق</button><button role="tab" id="n4" aria-selected="false" onclick="tab(4)"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>سجل</button><button role="tab" id="n5" aria-selected="false" onclick="tab(5)"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg>حسابي</button></nav>
+<div id="toast" role="status"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPA_URL='https://dbvzfcerkbhdolmocujm.supabase.co';
+const SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRidnpmY2Vya2JoZG9sbW9jdWptIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQ2NDIxNjAsImV4cCI6MjExMDIxODE2MH0.Bb7HzibF8dd_aSh0V_rxtpT6Byw6lH-ERnPZ9nYQcWc';
+const sb=supabase.createClient(SUPA_URL,SUPA_KEY);
+
+// ---------- static geography (fallback; replaced from DB at boot) ----------
+const R=[{n:'الصحراوي المباشر',c:'#0F766E',d:'M330,360 Q250,240 60,60',s:'6s'},{n:'الدائري ← محور 26 يوليو',c:'#C2410C',d:'M330,360 Q340,90 60,60',s:'7s'},{n:'محور عمرو بن العاص',c:'#6D28D9',d:'M330,360 C260,240 150,110 60,60',s:'6.5s'},{n:'كمال عامر / أحمد عرابي',c:'#1D4ED8',d:'M330,360 Q130,380 60,60',s:'8s'},{n:'وصلة دهشور',c:'#4D7C0F',d:'M330,360 Q40,440 60,60',s:'9s'}];
+let PTS=['ميدان الجيزة','المساحة','مدكور','الطالبية','المطبعة','العريش','ترسا','المريوطية','اللبيني','المنصورية','ميدان الرماية','أول الصحراوي','المتحف الكبير'],
+KM=[0,1.3,2.3,3.3,4.3,5,5.2,5.9,6.4,6.9,7.4,9,10.5],OFF=[0,6,10,14,18,21,22,25,27,30,32,34,36],
+DROP=['الحي الأول','الحي الثاني','الحي الثالث','الحي الرابع','الحي الخامس','الحي السادس','الحي السابع','الحي الثامن','أركان بلازا','بارك ستريت','جاليريا 40','ويست أرينا','دندي مول','هايبر وان','أمريكانا بلازا','مول العرب','مول مصر','بيفرلي هيلز','ويستاون','أليجريا','زيد ويست','مستشفى الشيخ زايد التخصصي','مسجد السليمانية','نادي الجزيرة','الحديقة الكندية','جامعة النيل','وصلة دهشور','ميدان جهينة','ميدان الحصري'],
+DG=[['أحياء زايد',0,8],['مولات',8,17],['كمبوندات',17,21],['أماكن عامة',21,26],['مداخل وميادين',26,29]];
+const DN=['أحد','اثنين','ثلاثاء','أربعاء','خميس','جمعة','سبت'],DAYS5=['أحد','اثنين','ثلاثاء','أربعاء','خميس'];
+const VB=['هادي','رغّاي','موسيقى هادية','تكييف','ممنوع تدخين','شنطة كبيرة'];
+const VF=['رخصة القيادة','رخصة العربية','الرقم القومي'];
+const WM=[['إنستا باي','حوّل على عنوان إنستا باي'],['فودافون كاش','حوّل على رقم المحفظة'],['فوري','ادفع بكود الدفع'],['تحويل بنكي','حوّل على الحساب']];
+const SO=[['m','الأنسب ليك'],['t','الأقرب ميعاد'],['p','الأرخص'],['s','أكتر مقاعد'],['f','المفضلة']];
+const OBS=[['وفّر في مشوارك','بدل 200 جنيه لوحدك، شارك العربية بحوالي 45 جنيه.'],['اركب من أقرب نقطة','نقط تجمع ثابتة على طريقك، والسواق مش بيلف على البيوت.'],['أمان في كل مشوار','كود تأكيد، مشاركة الرحلة مع حد قريب، وزرار طوارئ.']];
+const K='carpool-live-v1',$=i=>document.getElementById(i);
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+// ---------- local prefs ----------
+let S;try{S=JSON.parse(localStorage.getItem(K))}catch(e){}
+if(!S)S={fv:[],rc:[],th:'',nt:[],goal:300,rm:{}};
+const save=()=>{try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}};
+
+// ---------- server caches ----------
+let ME=null,PROFILE=null,RIDES=[],MYBOOKS=[],MYRIDES=[],PAX={},TX=[],RQS=[],NAMES={},RATINGS={};
+let bk=null,bp=null,off=0,wkf=false,ps=1,hv='p',so='t',BD={},oi=0,man={},hd=null,wo=false,vbs=[],rv={n:0,tags:[]};
+let wst={s:1,a:100,c:false,m:null,go:0,t:'n'},chatMsgs=[],chatBid=null;
+
+// ---------- helpers ----------
+const pt=(r,i)=>(r.tt&&r.tt[i])||tm(r.t,OFF[i]-OFF[r.pts[0]]||0);
+const tm=(s,i,raw)=>{let[h,m]=String(s||'7:30').split(':').map(Number);m+=raw?i:(OFF[i]||0);h+=Math.floor(m/60);m=((m%60)+60)%60;return h+':'+String(m).padStart(2,'0')};
+const mn=s=>{const a=String(s||'0:0').split(':').map(Number);return a[0]*60+a[1]};
+const comm=p=>Math.round(p*.15);
+const norm=v=>String(v||'').replace(/^0(?=\d:)/,'');
+const dayStr=d=>!d||d.length===7?'كل يوم':d.map(i=>DN[i]).join('، ');
+const ago=t=>{const m=Math.round((Date.now()-new Date(t).getTime())/60000);return m<1?'دلوقتي':m<60?'من '+m+' دقيقة':m<1440?'من '+Math.round(m/60)+' ساعة':'من '+Math.round(m/1440)+' يوم'};
+const fm=m=>m<60?m+' دقيقة':Math.floor(m/60)+' ساعة'+(m%60?' و'+m%60+' دقيقة':'');
+const fv=id=>(S.fv||[]).includes(id);
+function toast(t){const e=$('toast');try{navigator.vibrate&&navigator.vibrate(30)}catch(x){}e.textContent=t;e.style.display='block';clearTimeout(toast.i);toast.i=setTimeout(()=>e.style.display='none',3000)}
+function ntf(t){S.nt=S.nt||[];if(S.nt[0]&&S.nt[0].t===t)return;S.nt.unshift({t,at:Date.now(),r:0});S.nt=S.nt.slice(0,30);save();bell()}
+function bell(){const c=(S.nt||[]).filter(x=>!x.r).length,e=$('bdg');if(!e)return;e.hidden=!c;e.textContent=c}
+function nsh(){const n=S.nt||[];closeBk();$('bk').innerHTML=`<div class="card"><div class="row"><b>الإشعارات</b><button class="btn g" style="min-height:36px" onclick="closeBk()">إغلاق</button></div>${n.length?n.map(x=>`<div class="tl"><i></i><div>${esc(x.t)}<div class="mu">${ago(x.at)}</div></div></div>`).join(''):'<span class="mu">مفيش إشعارات لسه.</span>'}</div>`;n.forEach(x=>x.r=1);save();bell()}
+function closeBk(){wo=false;bk=null;bp=null;$('bk').innerHTML=''}
+function tab(n){for(let i=1;i<=5;i++){$('v'+i).hidden=i!==n;$('n'+i).setAttribute('aria-selected',i===n)}hl(n===3&&S.trip?S.trip.rt:n===2?+$('rt').value:null);extra()}
+function hl(i){document.querySelectorAll('#mapw .rt,#mapw .cr').forEach(e=>e.style.opacity=(i===null||i===''||+e.dataset.i===+i)?1:.15)}
+function map(){let s='<svg viewBox="0 0 390 420" role="img" aria-label="خريطة تقريبية لخمس طرق من الهرم إلى الشيخ زايد">';
+R.forEach((r,i)=>s+=`<path class="rt" data-i="${i}" id="r${i}" d="${r.d}" fill="none" stroke="${r.c}" stroke-width="4" stroke-linecap="round"/>`);
+R.forEach((r,i)=>[0,1].forEach(k=>s+=`<g class="cr" data-i="${i}"><rect x="-9" y="-5" width="18" height="10" rx="3" fill="${r.c}" stroke="#fff" stroke-width="1.5"/><rect x="-1" y="-3.5" width="6" height="7" rx="1.5" fill="#fff" opacity=".85"/><animateMotion dur="${r.s}" begin="-${k*parseFloat(r.s)/2}s" repeatCount="indefinite" rotate="auto"><mpath href="#r${i}"/></animateMotion></g>`));
+s+='<circle cx="330" cy="360" r="8" fill="#1B1B1B"/><text x="330" y="391" text-anchor="middle" font-size="14" font-weight="700" fill="#1B1B1B" font-family="Cairo,sans-serif">الهرم</text><circle cx="60" cy="60" r="8" fill="#1B1B1B"/><text x="60" y="40" text-anchor="middle" font-size="14" font-weight="700" fill="#1B1B1B" font-family="Cairo,sans-serif">الشيخ زايد</text></svg>';
+$('mapw').innerHTML=s;if(matchMedia('(prefers-reduced-motion: reduce)').matches)$('mapw').firstChild.pauseAnimations()}
+// ---------- data loading ----------
+async function loadPoints(){
+  try{
+    const[{data:base},{data:cps}]=await Promise.all([
+      sb.from('points').select('kind,id,name,off_minutes,km').order('id'),
+      sb.from('custom_points').select('id,name,off_minutes,km').order('id')]);
+    if(base&&base.length){
+      PTS=[];OFF=[];KM=[];DROP=[];
+      base.forEach(p=>{if(p.kind==='pickup'){PTS[p.id]=p.name;OFF[p.id]=p.off_minutes||0;KM[p.id]=+p.km||0}else DROP[p.id]=p.name});
+    }
+    (cps||[]).forEach(c=>{PTS[c.id]=c.name;OFF[c.id]=c.off_minutes;KM[c.id]=+c.km||0});
+  }catch(e){}
+}
+function adaptRide(r){return{id:r.id,r:r.route,t:r.t,tt:r.tt||{},pts:r.pts||[],dr:r.dr,seats:r.seats,left:r.left,price:r.price,car:r.car,col:r.col,pl:r.plate,who:r.who||(NAMES[r.driver_id]||'سواق'),w:r.women,days:r.days,vb:r.vb||[],ar:r.ar,mine:r.driver_id===ME,demo:r.is_demo,driver:r.driver_id,st:r.status}}
+async function loadNames(ids){ids=[...new Set(ids.filter(Boolean))];if(!ids.length)return;
+  const{data}=await sb.from('profiles').select('id,name,vf').in('id',ids);
+  (data||[]).forEach(p=>{NAMES[p.id]=p.name;RATINGS[p.id+'_vf']=p.vf})}
+async function refreshRides(){
+  const{data}=await sb.from('rides').select('*').eq('status','open').order('created_at',{ascending:false}).limit(100);
+  if(!data)return;
+  await loadNames(data.map(r=>r.driver_id));
+  RIDES=data.map(adaptRide);MYRIDES=RIDES.filter(r=>r.mine);
+}
+function adaptBooking(b){const r=b.ride||{};return{bid:b.id,rid:b.ride_id,p:b.pt,t:(r.tt&&r.tt[b.pt])||tm(r.t,(OFF[b.pt]||0)-(OFF[(r.pts||[0])[0]]||0)),dr:r.dr||0,price:b.price,offer:b.offer,rt:r.route||0,car:r.car||'',col:r.col||'',pl:r.plate||'',who:r.who||'السواق',wk:b.weekly?1:0,pin:b.pin,st:b.status,stars:b.stars,tags:b.tags||[],at:new Date(b.created_at).getTime(),driver:r.driver_id,ride:r.id?adaptRide(r):null,days:r.days}}
+async function refreshMyBooks(notify){
+  const{data}=await sb.from('bookings').select('*,ride:rides(*)').eq('passenger_id',ME).order('created_at',{ascending:false}).limit(60);
+  if(!data)return;
+  const old={};MYBOOKS.forEach(b=>old[b.bid]=b.st);
+  MYBOOKS=data.map(adaptBooking);
+  if(notify)MYBOOKS.forEach(b=>{const o=old[b.bid];if(o&&o!==b.st){
+    if(b.st==='accepted')ntf('السواق وافق على عرضك · '+b.price+' جنيه');
+    else if(b.st==='countered')ntf('السواق رد بسعر '+b.price+' جنيه');
+    else if(b.st==='onboard')ntf('السواق أكد إنك ركبت. رحلة سعيدة');
+    else if(b.st==='cancelled'&&o!=='cancelled')ntf('اتلغى حجزك في مشوار '+R[b.rt].n)}});
+}
+async function refreshPax(notify){
+  if(!MYRIDES.length){PAX={};return}
+  const{data}=await sb.from('bookings').select('*').in('ride_id',MYRIDES.map(r=>r.id)).in('status',['pending','countered','accepted','onboard']).order('created_at');
+  if(!data)return;
+  await loadNames(data.map(b=>b.passenger_id));
+  const old=PAX;PAX={};data.forEach(b=>{(PAX[b.ride_id]=PAX[b.ride_id]||[]).push(b)});
+  if(notify)data.forEach(b=>{const prev=(old[b.ride_id]||[]).find(x=>x.id===b.id);
+    if(!prev&&b.status==='pending')ntf('عرض حجز جديد على مشوارك: '+b.price+' جنيه');
+    if(prev&&prev.status!==b.status&&b.status==='accepted'&&prev.status==='countered')ntf('الراكب قبل سعرك '+b.price+' جنيه')});
+}
+async function refreshTx(){const{data}=await sb.from('transactions').select('*').order('created_at',{ascending:false}).limit(30);TX=data||[]}
+async function refreshRqs(){const{data}=await sb.from('ride_requests').select('*').eq('status','open').order('created_at',{ascending:false}).limit(50);RQS=data||[];await loadNames(RQS.map(x=>x.user_id))}
+async function loadProfile(){
+  const{data}=await sb.from('profiles').select('*').eq('id',ME).maybeSingle();
+  PROFILE=data;vbs=[];
+  if(PROFILE&&PROFILE.theme&&!S.th){S.th=PROFILE.theme;save()}
+}
+async function refreshAll(notify){await Promise.all([refreshRides(),refreshMyBooks(notify),refreshTx(),refreshRqs()]);await refreshPax(notify)}
+
+// ---------- rendering: rides tab ----------
+const ft=r=>mn(pt(r,r.pts[0]));
+function mt(r){const f=$('f').value,d=$('df').value;return Math.min(99,60+(f!==''&&r.pts.includes(+f)?15:0)+(d!==''&&r.dr===+d?15:0)+(isVf(r)?5:0)+(r.left>1?4:0))}
+function isVf(r){const v=RATINGS[r.driver+'_vf'];return r.demo||(v&&v.every(Boolean))}
+function sortR(L){if(so==='f')L=L.filter(r=>fv(r.id));L=[...L].sort((a,b)=>so==='m'?mt(b)-mt(a):so==='p'?a.price-b.price:so==='s'?b.left-a.left:ft(a)-ft(b));BD={};if(L.length){const c=[...L].sort((a,b)=>a.price-b.price)[0].id,e=[...L].sort((a,b)=>ft(a)-ft(b))[0].id;L.forEach(r=>{BD[r.id]=[];if(r.id===e)BD[r.id].push('الأقرب ميعاد');if(r.id===c)BD[r.id].push('الأرخص')})}
+$('sr').innerHTML=SO.map(x=>`<button aria-pressed="${so===x[0]}" onclick="so='${x[0]}';render()">${x[1]}</button>`).join('');return L}
+function card(r,extra){const c=R[r.r].c,f=$('f').value,b=[...(BD[r.id]||[]),...(r.w?['للسيدات']:[]),...(r.left===1?['آخر مقعد']:[]),...(isVf(r)?['موثّق ✓']:[]),...(r.vb||[]).slice(0,3).map(i=>VB[i])];
+return `<article class="card rc" style="border-inline-start:5px solid ${c}" onclick="hl(${r.r});det(${r.id})"><div class="row"><div class="row" style="justify-content:flex-start;gap:10px"><span class="av sm" style="background:${c}">${esc(r.who).slice(0,1)}</span><div><b>${esc(r.who)}</b><div class="mu">${esc(r.car)} · ${esc(r.col)}</div></div></div><div><span class="pr" style="font-size:24px">${r.price}</span> <span class="mu">جنيه</span><div class="mu">توافق ${mt(r)}%</div></div></div>${b.length?`<div class="bd">${b.map(x=>`<span class="${x==='للسيدات'?'w2':''}">${x}</span>`).join('')}</div>`:''}<div class="pills">${r.pts.map(i=>`<span class="pill ${String(i)===f?'on':''}"><b>${pt(r,i)}</b>${PTS[i]}</span>`).join('')}</div><div class="mu">${R[r.r].n} · النزول: ${DROP[r.dr||0]}${r.ar?' · وصول تقريباً '+r.ar:''}</div>${r.days&&r.days.length?`<div class="mu">أيام: ${dayStr(r.days)}</div>`:''}<div class="row"><span class="seats" role="img" aria-label="متبقي ${r.left} من ${r.seats}">${Array.from({length:r.seats},(_,i)=>`<svg class="${i<r.seats-r.left?'e':''}"><use href="#pe"/></svg>`).join('')}</span><div class="pl">${esc(r.pl)}</div></div><div class="row" style="gap:8px"><button class="btn g" style="min-height:40px;flex:1" onclick="event.stopPropagation();wa(${r.id})">شارك على واتساب</button><button class="btn g" style="min-height:40px;width:48px;padding:0" aria-label="${fv(r.id)?'شيل من المفضلة':'ضيف للمفضلة'}" onclick="event.stopPropagation();fvt(${r.id})">${fv(r.id)?'★':'☆'}</button></div>${extra||''}</article>`}
+function nearH(){const f=$('f').value;if(f==='')return '';const F=+f,n=RIDES.filter(r=>r.left>0&&!r.mine&&!r.pts.includes(F)&&r.pts.some(p=>Math.abs((OFF[p]||0)-(OFF[F]||0))<=8));return n.length?'<b style="display:block;margin:8px 0">مشاوير قريبة من '+PTS[F]+'</b>'+n.slice(0,3).map(r=>{const p=r.pts.reduce((a,b)=>Math.abs((OFF[b]||0)-(OFF[F]||0))<Math.abs((OFF[a]||0)-(OFF[F]||0))?b:a);return `<div class="card"><div class="row"><b>${PTS[p]}</b><span class="chip">بعيد حوالي ${Math.abs((OFF[p]||0)-(OFF[F]||0))} دقيقة على الطريق</span></div><div class="mu">${pt(r,p)} · ${R[r.r].n} · ${r.price} جنيه</div><button class="btn g" onclick="pks(1,'${p}')">اعرض من ${PTS[p]}</button></div>`}).join(''):''}
+function render(){
+  $('bal').textContent=PROFILE?PROFILE.balance:'…';
+  const f=$('f').value,wf=$('wf').checked,df=$('df').value;
+  const L=sortR(RIDES.filter(r=>!r.mine&&(f===''||r.pts.includes(+f))&&(!wf||r.w)&&(df===''||r.dr===+df)));
+  $('rides').innerHTML=L.length?L.map(r=>card(r,`<button class="btn" ${r.left?'':'disabled'} onclick="event.stopPropagation();openBk(${r.id})">${r.left?'احجز':'اكتمل'}</button>`)).join(''):'<div class="card" style="align-items:center;text-align:center"><svg viewBox="0 0 24 24" width="56" fill="var(--bd)"><path d="M12 22s7-6.2 7-12a7 7 0 10-14 0c0 5.8 7 12 7 12z"/></svg><b>مفيش مشاوير هنا دلوقتي</b><span class="mu">جرب تغير النقطة أو المكان، أو انشر مشوارك أنت.</span><button class="btn" onclick="rqf()">اطلب مشوار</button><button class="btn g" onclick="clr()">امسح الاختيارات</button></div>'+nearH();
+  const act=MYBOOKS.filter(b=>['pending','countered','accepted','onboard'].includes(b.st));
+  $('books').innerHTML=act.length?act.map((b,i)=>`<article class="card"><div class="row"><b><i class="dot" style="background:${R[b.rt].c}"></i>${PTS[b.p]} · ${b.t}</b><span class="pr">${b.price} جنيه</span></div><div class="mu">${esc(b.car)} · ${esc(b.col)} · ${esc(b.who)}</div><div class="pl">${esc(b.pl)}</div><div class="mu">${bSt(b)}${b.wk?' · اشتراك أسبوعي':''} · الدفع كاش للسواق</div>${b.st==='countered'?`<div class="row"><button class="btn" onclick="rConfirm(${b.bid})">أقبل ${b.price} جنيه</button><button class="btn g" onclick="cancelBk(${b.bid})">رفض</button></div>`:`<button class="btn g" onclick="cancelBk(${b.bid})">إلغاء الحجز</button>`}</article>`).join(''):'<p class="mu">لسه ما حجزتش حاجة.</p>';
+  $('mine').innerHTML=MYRIDES.length?MYRIDES.map(r=>card(r,paxH(r))).join(''):'<p class="mu">لسه ما نشرتش مشاوير.</p>';
+  extra()}
+function bSt(b){return {pending:'في انتظار رد السواق',countered:'السواق رد بسعر '+b.price,accepted:'اتأكد الحجز · كودك '+b.pin,onboard:'في الرحلة',done:'خلصت',cancelled:'ملغي',rejected:'مرفوض'}[b.st]||b.st}
+function extra(){$('mapw').hidden=$('v1').hidden&&$('v2').hidden;renderTrip();renderHist();nxr();vfr();profR();vbr();bell();psr();pkt();
+$('stat').innerHTML=`<div class="card"><b>لوحة السواق</b><div class="row"><span class="mu">ركاب ركبوا معاك</span><b>${DST.pax||0}</b></div><div class="row"><span class="mu">عمولة اتدفعت</span><b>${DST.commission||0} جنيه</b></div><div class="row"><span class="mu">كاش استلمته</span><b class="pr">${DST.earned||0} جنيه</b></div></div>`+lowB()+lvh()}
+let DST={};
+async function refreshStats(){const{data}=await sb.rpc('driver_stats');if(data)DST=data}
+function lowB(){return PROFILE&&PROFILE.balance<30?`<div class="card" style="border-color:var(--er)"><b>رصيدك قليل</b><span class="mu">لما الرصيد يقل عن العمولة مش هتقدر تسجّل ركاب. اشحن الأول.</span><button class="btn" onclick="wal()">اشحن دلوقتي</button></div>`:''}
+function lvh(){const p=(DST.pax||0)*10,L=[['برونزي',0],['فضي',50],['ذهبي',150],['بلاتيني',400]];let i=0;L.forEach((x,k)=>{if(p>=x[1])i=k});const nx=L[i+1],pg=nx?(p-L[i][1])/(nx[1]-L[i][1]):1;return `<div class="card"><div class="row"><b>مستواك: ${L[i][0]}</b><span class="chip">${p} نقطة</span></div><div class="stp"><span class="${pg>0?'on':''}"></span><span class="${pg>.33?'on':''}"></span><span class="${pg>.66?'on':''}"></span><span class="${pg>=1?'on':''}"></span></div><span class="mu">${nx?'باقي '+(nx[1]-p)+' نقطة للمستوى '+nx[0]:'وصلت لأعلى مستوى'} · كل راكب بيركب معاك = 10 نقاط</span></div>`+gl()+rqd()}
+function gl(){const g=S.goal||300,p=DST.earned||0;return `<div class="card"><div class="row"><b>هدفك النهارده</b><span class="chip">${p} / ${g} جنيه</span></div><div style="height:8px;border-radius:4px;background:var(--bd)"><div style="height:8px;border-radius:4px;background:var(--ac);width:${Math.min(100,100*p/g)}%;transition:width .6s"></div></div><input type="number" aria-label="هدفك اليومي بالجنيه" value="${g}" onchange="S.goal=+this.value||300;save();render()"></div>`}
+// ---------- booking flow ----------
+function openBk(id){const r=RIDES.find(x=>x.id===id);if(!r)return;
+if(MYBOOKS.some(b=>b.rid===id&&['pending','countered','accepted','onboard'].includes(b.st)))return toast('انت حاجز في المشوار ده بالفعل.');
+bk=id;off=r.price;hl(r.r);const f=$('f').value;bp=f!==''&&r.pts.includes(+f)?+f:null;
+$('bk').innerHTML=`<div class="card" id="bkc"><div class="row"><b>احجز مقعد</b><button class="btn g" style="min-height:36px" onclick="closeBk()">إغلاق</button></div><span class="mu">${R[r.r].n} · النزول: ${DROP[r.dr||0]}</span><label>اختار نقطة الركوب</label><div>${r.pts.map(i=>`<button class="pp2" id="bp${i}" aria-pressed="false" onclick="pickP(${i})"><span><b>${PTS[i]}</b><br><span class="mu">السواق بيعدي الساعة ${pt(r,i)}</span></span><span class="tick"></span></button>`).join('')}</div><span class="mu" id="sum" role="status">اختار النقطة اللي هتركب منها.</span><label>عرضك للمقعد (جنيه)</label><div class="row"><button class="btn g" aria-label="قلل" onclick="stp(-5)">−</button><b class="pr" id="off">${off}</b><button class="btn g" aria-label="زوّد" onclick="stp(5)">+</button></div><span class="mu">السعر المعلن ${r.price} جنيه، كاش للسواق. تقدر تعرض أقل والسواق يقبل أو يرد بسعر.</span><label style="display:flex;align-items:center;gap:8px;font-weight:700"><input type="checkbox" id="wk" style="width:20px;min-height:20px" onchange="wkc()">اشتراك أسبوعي (5 أيام)</label><span class="mu" id="wks"></span><button class="btn" id="sbtn" onclick="send()" disabled>ابعت العرض</button></div>`;if(bp!==null)pickP(bp)}
+function pickP(i){bp=i;const r=RIDES.find(x=>x.id===bk);document.querySelectorAll('.pp2').forEach(b=>b.setAttribute('aria-pressed',b.id==='bp'+i?'true':'false'));$('sbtn').disabled=false;$('sum').textContent='هتركب من '+PTS[i]+' الساعة '+pt(r,i)+'. كون جاهز قبلها بـ 5 دقايق.'}
+function stp(d){off=Math.max(5,off+d);$('off').textContent=off;wkc()}
+function wkc(){const e=$('wks');if(e)e.textContent=$('wk').checked?'5 أيام = '+Math.round(off*5*.9)+' جنيه بدل '+off*5+' (خصم 10%)':''}
+async function send(){const r=RIDES.find(x=>x.id===bk),p=bp;if(p===null||!r)return;wkf=!!($('wk')&&$('wk').checked);
+$('bkc').innerHTML='<div class="radar"><i></i><i></i><b></b></div><p class="mu" style="text-align:center">بنبعت عرضك للسواق...</p>';
+const{data,error}=await sb.rpc('book_ride',{p_ride:r.id,p_pt:p,p_offer:off,p_weekly:wkf});
+if(error){$('bkc').innerHTML=`<b>مش قادرين نحجز دلوقتي</b><span class="er">${esc(error.message)}</span><button class="btn" onclick="openBk(${r.id})">رجوع</button>`;return}
+await refreshMyBooks();render();
+const b=MYBOOKS.find(x=>x.bid===data.id);
+if(data.status==='accepted'){finGo(b)}
+else{$('bkc').innerHTML=`<div class="radar"><i></i><i></i><b></b></div><p class="mu" style="text-align:center">عرضك عند السواق. هنقفل النافذة دي وهنبلغك برده فوراً.</p><button class="btn" onclick="closeBk();tab(3)">تمام</button>`;ntf('اتبعت عرضك للسواق: '+off+' جنيه')}}
+async function rConfirm(bid){const{error}=await sb.rpc('rider_respond',{p_booking:bid,p_action:'confirm'});if(error)return toast(error.message);await refreshMyBooks();const b=MYBOOKS.find(x=>x.bid===bid);if(b)finGo(b);render()}
+async function cancelBk(bid){const{error}=await sb.rpc('rider_respond',{p_booking:bid,p_action:'cancel'});if(error)return toast(error.message);if(S.trip&&S.trip.bid===bid){S.trip=null;save()}await refreshAll();render();toast('اتلغى الحجز.')}
+function cancelRide(rid){const b=MYBOOKS.find(x=>x.rid===rid&&['pending','countered','accepted','onboard'].includes(x.st));if(b)cancelBk(b.bid)}
+function finGo(b){if(!b)return;S.trip={...b,at:Date.now(),st:'c'};save();closeBk();render();tab(3);toast('السواق وافق. شوف رحلتك.')}
+async function det(id){const r=RIDES.find(x=>x.id===id);if(!r)return;const c=R[r.r].c,sv=Math.max(0,200-r.price);
+let rt='-',tr=0,tags=[];try{const{data}=await sb.rpc('driver_rating',{p_driver:r.driver});if(data){rt=data.count?data.avg:'جديد';tr=data.count;tags=(data.tags||[]).slice(0,2)}}catch(e){}
+$('bk').innerHTML=`<div class="card" style="max-height:88vh;overflow:auto"><div class="row"><b><i class="dot" style="background:${c}"></i>${R[r.r].n}</b><button class="btn g" style="min-height:36px" onclick="closeBk()">إغلاق</button></div><div class="row" style="justify-content:flex-start;gap:12px"><span class="av" style="background:${c}">${esc(r.who).slice(0,1)}</span><div><b>${esc(r.who)}</b> ${isVf(r)?'<span class="chip">موثّق ✓</span>':''}<div class="mu">★ ${rt}${tr?' · '+tr+' رحلة':''}</div></div></div><div class="mu">${esc(r.car)} · ${esc(r.col)} · ${esc(r.pl)}</div><div>${r.pts.map((i,k)=>`<div class="tl ${k===0?'done':''}"><i></i><div><b>${PTS[i]}</b> <span class="mu">${pt(r,i)}</span></div></div>`).join('')}<div class="tl"><i></i><div><b>${DROP[r.dr||0]}</b> <span class="mu">${r.ar?'وصول تقريباً '+r.ar:'نزول'}</span></div></div></div>${(r.vb||[]).length?`<div class="bd">${r.vb.map(i=>`<span>${VB[i]}</span>`).join('')}</div>`:''}${r.days&&r.days.length?`<span class="mu">بيكرر: ${dayStr(r.days)}</span>`:''}<b>قواعد المشوار</b><span class="mu">الدفع كاش للسواق · السواق بيستنى 3 دقايق بس عند النقطة · تقدر تلغي من تاب رحلتي.</span>${tags.length?'<b>آراء الركاب</b>'+tags.map(t=>`<div class="card" style="margin:0"><span class="mu">${esc(t)}</span></div>`).join(''):''}<div class="row"><span>السعر</span><b class="pr">${r.price} جنيه</b></div><span class="mu">توفير حوالي ${sv} جنيه مقارنة بمشوار منفرد بـ 200 جنيه (تقدير).</span><button class="btn" ${r.left?'':'disabled'} onclick="openBk(${r.id})">${r.left?'احجز مقعد':'اكتمل'}</button></div>`}
+function wa(id){const r=RIDES.find(x=>x.id===id);if(!r)return;const x='مشوار '+R[r.r].n+': '+r.pts.map(i=>PTS[i]+' '+pt(r,i)).join(' ← ')+' ← '+DROP[r.dr||0]+'. '+r.price+' جنيه للمقعد، متبقي '+r.left+' مقاعد. من تطبيق مشوار معايا.';window.open('https://wa.me/?text='+encodeURIComponent(x),'_blank')}
+function fvt(id){S.fv=S.fv||[];S.fv=fv(id)?S.fv.filter(x=>x!==id):[...S.fv,id];save();render();toast(fv(id)?'اتضاف للمفضلة.':'اتشال من المفضلة.')}
+function skl(){$('rides').innerHTML='<div class="sk"></div><div class="sk"></div>';clearTimeout(skl.i);skl.i=setTimeout(render,350)}
+function clr(){$('f').value='';$('df').value='';$('wf').checked=false;skl()}
+
+// ---------- driver console ----------
+function paxH(r){const P=(PAX[r.id]||[]),T={pending:'عرض جديد',countered:'رديت بسعرك',accepted:'محجوز',onboard:'ركب'};
+return `<div class="card" style="margin:0;background:var(--soft)" onclick="event.stopPropagation()"><b>الركاب (${P.filter(x=>x.status==='accepted'||x.status==='onboard').length})</b>${P.length?P.map(x=>`<div class="row"><div><b style="font-weight:400">${esc(NAMES[x.passenger_id]||'راكب')}</b><div class="mu">${x.price} جنيه${x.offer&&x.offer!==x.price?' (عرض '+x.offer+')':''} · ${T[x.status]||x.status}${x.status==='onboard'?' · عمولة '+comm(x.price):''}</div></div><div class="row" style="gap:6px">${x.status==='pending'?`<button class="btn" style="min-height:36px;padding:0 12px" onclick="drv(${x.id},'accept')">قبول ${x.price}</button><button class="btn g" style="min-height:36px;padding:0 10px" onclick="drv(${x.id},'counter',${r.price})">رد بـ ${r.price}</button><button class="btn g" style="min-height:36px;padding:0 10px" onclick="drv(${x.id},'reject')">رفض</button>`:x.status==='accepted'?`<button class="btn" style="min-height:36px;padding:0 12px" onclick="drv(${x.id},'onboard')">ركب</button><button class="btn g" style="min-height:36px;padding:0 10px" onclick="drv(${x.id},'cancel')">ما ظهرش</button>`:x.status==='onboard'?`<button class="btn g" style="min-height:36px;padding:0 10px" onclick="drv(${x.id},'refund')">إلغاء واسترجاع</button>`:''}</div></div>${x.status!=='pending'?miniChat(x):''}`).join(''):'<span class="mu">لسه مفيش ركاب. لما حد يحجز هتقدر تقبل أو ترد بسعر من هنا.</span>'}</div>`}
+function miniChat(x){return ''}
+async function drv(bid,action,price){const{error}=await sb.rpc('driver_respond',{p_booking:bid,p_action:action,p_price:price||null});
+if(error){toast(error.message);if(/رصيدك/.test(error.message))wal();return}
+await refreshAll();render();toast({accept:'قبلت الحجز.',counter:'اتبعت ردك للراكب.',reject:'اترفض العرض.',cancel:'اتلغى الحجز من غير عمولة.',onboard:'اتخصم العمولة. رحلة سعيدة.',refund:'اترجّعت العمولة.'}[action]||'تم')}
+
+// ---------- publish ----------
+const PT3=['العربية','المسار والسعر','التفاصيل'];
+function psr(){document.querySelectorAll('.ps').forEach(e=>e.classList.toggle('on',+e.dataset.s===ps));$('psh').innerHTML=`<div class="sp">${[1,2,3].map(i=>`<span class="${ps>=i?'on':''}">${i}</span>${i<3?`<i class="${ps>i?'on':''}"></i>`:''}`).join('')}</div><b style="display:block;margin:6px 0">${PT3[ps-1]}</b>`;$('pb').style.visibility=ps===1?'hidden':'visible';$('pn2').textContent=ps===3?'انشر المشوار':'التالي'}
+function tg2(){const s=$('v2');s.classList.toggle('cl');const o=!s.classList.contains('cl');if(o){ps=1;prePub()}psr();$('cta').textContent=o?'إغلاق النموذج':'+ انشر مشوار جديد'}
+function prePub(){if(!PROFILE)return;if(!$('who').value&&PROFILE.name)$('who').value=PROFILE.name;if(!$('car').value&&PROFILE.car)$('car').value=PROFILE.car;if(PROFILE.col)$('col').value=PROFILE.col;if(!$('pl').value&&PROFILE.plate)$('pl').value=PROFILE.plate}
+function pgo(d){if(d>0&&ps===1&&!($('car').value.trim()&&$('pl').value.trim()))return toast('اكتب الماركة ورقم اللوحة الأول.');
+if(d>0&&ps===2&&!document.querySelector('.pp:checked'))return toast('اختار نقطة ركوب واحدة على الأقل.');
+if(d>0&&ps===2){const q=[...document.querySelectorAll('.pp:checked')].map(e=>+e.value).sort((a,b)=>(OFF[a]||0)-(OFF[b]||0)),o=readTT(q),m=tte(q,q.map(i=>o[i]));if(m)return toast(m)}
+if(d>0&&ps===3){pub();return}
+ps=Math.max(1,Math.min(3,ps+d));psr()}
+function cm(){$('cmt').textContent='عمولتك عن كل راكب: '+comm(+$('price').value||0)+' جنيه (بتتخصم لما الراكب يركب)'}
+function ttRender(){const pts=[...document.querySelectorAll('.pp:checked')].map(e=>+e.value).sort((a,b)=>(OFF[a]||0)-(OFF[b]||0)),e=$('tt');if(!pts.length){e.innerHTML='';return}
+const b=man[pts[0]]||$('time').value||'07:30',v=pts.map((i,k)=>k?(man[i]||tm(b,(OFF[i]||0)-(OFF[pts[0]]||0),1)):b),w=tte(pts,v),last=pts.length-1;
+e.innerHTML='<div class="card"><b>جدول مرورك (عدّل أي ميعاد)</b>'+pts.map((i,k)=>`<div class="row"><div><span>${PTS[i]}</span>${k?`<div class="mu" style="font-size:12px">${((KM[i]||0)-(KM[pts[k-1]]||0)).toFixed(1)} كم من ${PTS[pts[k-1]]}</div>`:''}</div><input id="tt${i}" type="time" style="width:130px" value="${v[k].padStart(5,'0')}" onchange="man[${i}]=this.value;ttRender()"></div>`).join('')+(w?`<span class="er">${w}</span>`:'')+`<span class="mu">وصولك لزايد تقريباً: ${tm(v[last],65-(OFF[pts[last]]||0)+5,1)}. الأوقات والمسافات تقريبية، عدّلها حسب خبرتك.</span></div>`}
+function readTT(pts){const o={};pts.forEach(i=>{const e=$('tt'+i);o[i]=e&&e.value?norm(e.value):tm('07:30',OFF[i]||0,1)});return o}
+function tte(pts,v){for(let k=1;k<pts.length;k++){const g=mn(v[k])-mn(v[k-1]),m=Math.max(2,Math.round(((OFF[pts[k]]||0)-(OFF[pts[k-1]]||0))*.6));if(g<m)return 'الوقت بين '+PTS[pts[k-1]]+' و'+PTS[pts[k]]+' قليل. المفروض مش أقل من '+m+' دقيقة.'}return ''}
+async function pub(){const car=$('car').value.trim(),pl=$('pl').value.trim(),who=$('who').value.trim(),pts=[...document.querySelectorAll('.pp:checked')].map(e=>+e.value).sort((a,b)=>(OFF[a]||0)-(OFF[b]||0)),price=Math.max(5,+$('price').value||45),seats=Math.max(1,Math.min(4,+$('seats').value||3)),er=$('er');
+if(!car||!pl||!pts.length){er.textContent='اكتب الماركة ورقم اللوحة واختار نقطة ركوب واحدة على الأقل.';return}
+if(PROFILE&&PROFILE.balance<comm(price)){er.textContent='رصيدك مش كفاية، اشحن الأول.';return}
+const tt=readTT(pts),days=[...document.querySelectorAll('.dy:checked')].map(e=>+e.value);
+const row={route:+$('rt').value,t:tt[pts[0]],tt,ar:tm(tt[pts[pts.length-1]],65-(OFF[pts[pts.length-1]]||0)+5,1),days,pts,dr:+$('dr').value,seats,left:seats,price,car,col:$('col').value,plate:pl,who:who||'أنا',women:$('wo').checked,vb:[...vbs]};
+er.textContent='';const{error}=await sb.from('rides').insert(row);
+if(error){er.textContent='حصلت مشكلة في النشر: '+error.message;return}
+if(PROFILE&&(who||car||pl)){Object.assign(PROFILE,{name:who||PROFILE.name,car,col:$('col').value,plate:pl});sb.from('profiles').update({name:PROFILE.name,car,col:PROFILE.col,plate:pl}).eq('id',ME).then(()=>{})}
+await refreshRides();render();ps=1;psr();$('v2').classList.add('cl');$('cta').textContent='+ انشر مشوار جديد';toast('اتنشر المشوار.')}
+function vbr(){$('vb').innerHTML=VB.map((x,i)=>`<button aria-pressed="${vbs.includes(i)}" onclick="vbt(${i})">${x}</button>`).join('')}
+function vbt(i){vbs=vbs.includes(i)?vbs.filter(x=>x!==i):[...vbs,i];vbr()}
+function vfr(){const vf=(PROFILE&&PROFILE.vf)||[false,false,false];const d=vf.filter(Boolean).length;$('vfc').innerHTML=`<div class="card"><div class="row"><b>وثّق حسابك</b><span class="chip">${d}/3</span></div><span class="mu">السواق الموثّق بيظهر بشارة وبيتحجز عنده أكتر.</span><div class="stp">${vf.map(x=>`<span class="${x?'on':''}"></span>`).join('')}</div><div class="vf row" style="flex-wrap:wrap">${VF.map((x,i)=>`<button aria-pressed="${!!vf[i]}" onclick="vfT(${i})">${vf[i]?'✓ ':''}${x}</button>`).join('')}</div><span class="mu">التوثيق الكامل بمراجعة المستندات بيتفعّل عند الإطلاق الرسمي.</span></div>`}
+async function vfT(i){if(!PROFILE)return;PROFILE.vf=PROFILE.vf||[false,false,false];PROFILE.vf[i]=!PROFILE.vf[i];vfr();render();await sb.from('profiles').update({vf:PROFILE.vf}).eq('id',ME)}
+// ---------- my trip ----------
+const CARSVG='<svg viewBox="0 0 64 30" width="46" style="display:block;transform:scaleX(-1)" aria-hidden="true"><path d="M4 20V15Q4 12 8 11L16 10L22 3Q23 2 25 2H41Q43 2 44 3L50 10L58 12Q61 13 61 16V20Q61 22 59 22H5Q4 22 4 20Z" fill="currentColor"/><path d="M24 4H41L47 10H19Z" fill="var(--card)"/><circle cx="17" cy="23" r="5.5" fill="var(--tx)"/><circle cx="17" cy="23" r="2" fill="var(--card)"/><circle cx="48" cy="23" r="5.5" fill="var(--tx)"/><circle cx="48" cy="23" r="2" fill="var(--card)"/></svg>';
+function stops(t){const r=t.ride||RIDES.find(x=>x.id===t.rid);return r?r.pts.map(i=>({n:PTS[i],t:pt(r,i),i})):[{n:PTS[t.p],t:t.t,i:t.p}]}
+function trk(rid){const b=MYBOOKS.find(x=>x.rid===rid&&['accepted','onboard','pending','countered'].includes(x.st));if(!b)return;S.trip={...b,at:Date.now(),st:b.st==='onboard'?'o':'c'};save();renderTrip();tab(3)}
+async function renderTrip(){const t=S.trip,e=$('trip');
+if(!t){e.innerHTML=hub();return}
+const live=MYBOOKS.find(x=>x.bid===t.bid);
+if(live&&live.st==='cancelled'){S.trip=null;save();e.innerHTML=hub();return}
+if(live){t.price=live.price;t.pin=live.pin;t.who=live.who;t.car=live.car;t.col=live.col;t.pl=live.pl;t.ride=live.ride}
+return trip2(t,e)}
+function geo(t){const S0=stops(t),n=S0.length,ui=Math.max(0,S0.findIndex(x=>x.i===t.p)),now=Date.now(),fk=k=>.1+.75*k/Math.max(1,n-1),pf=fk(ui);
+const pr=t.st==='c'?pf*Math.min(1,(now-t.at)/(6000*(ui+1))):t.st==='o'?pf+(1-pf)*Math.min(1,(now-(t.ob||now))/(8000*(n-ui))):1;
+return{S0,n,ui,fk,pf,pr,cur:S0.reduce((a,x,k)=>fk(k)<=pr+1e-9?k:a,0)}}
+function tmap(t){const c=R[t.rt].c,d=R[t.rt].d,bl=[[20,40,60,40],[110,30,50,60],[300,60,70,50],[40,150,50,60],[250,170,60,40],[60,300,80,50],[160,330,60,40],[320,250,50,60],[200,120,40,40],[100,220,50,50]],tx='font-size="13" font-weight="700" fill="#1B1B1B" font-family="Cairo,sans-serif" text-anchor="middle"';
+return `<svg viewBox="0 20 390 400" role="img" aria-label="خريطة الرحلة" style="width:100%;height:320px;display:block;background:#EAE6DA;border-radius:18px"><g fill="#DDD8CA">${bl.map(b=>`<rect x="${b[0]}" y="${b[1]}" width="${b[2]}" height="${b[3]}" rx="8"/>`).join('')}</g><path d="${d}" fill="none" stroke="#fff" stroke-width="12" stroke-linecap="round"/><path id="tp" d="${d}" fill="none" stroke="${c}" stroke-width="5" stroke-linecap="round" opacity=".35"/><path id="tpd" d="${d}" fill="none" stroke="${c}" stroke-width="5" stroke-linecap="round" stroke-dasharray="0 2000"/><text x="330" y="384" ${tx}>الهرم</text><text x="60" y="42" ${tx}>الشيخ زايد</text><g id="tcar" style="transition:transform .25s linear"><g transform="translate(-17,-8) scale(.55)"><path d="M4 20V15Q4 12 8 11L16 10L22 3Q23 2 25 2H41Q43 2 44 3L50 10L58 12Q61 13 61 16V20Q61 22 59 22H5Q4 22 4 20Z" fill="${c}" stroke="#fff" stroke-width="2.5"/><path d="M24 4H41L47 10H19Z" fill="#fff"/><circle cx="17" cy="23" r="5.5" fill="#1B1B1B"/><circle cx="48" cy="23" r="5.5" fill="#1B1B1B"/></g></g></svg>`}
+function updMap(){const t=S.trip,p=$('tp');if(!t||!p||$('v3').hidden)return;const g=geo(t),L=p.getTotalLength(),q=p.getPointAtLength(L*g.pr),a=p.getPointAtLength(L*Math.min(1,g.pr+.012)),b=p.getPointAtLength(L*Math.max(0,g.pr-.012)),dx=g.pr>=1?q.x-b.x:a.x-q.x,dy=g.pr>=1?q.y-b.y:a.y-q.y;
+$('tcar').style.transform=`translate(${q.x}px,${q.y}px) rotate(${Math.atan2(dy,dx)*180/Math.PI}deg)${dx<0?' scaleY(-1)':''}`;$('tpd').style.strokeDasharray=`${L*g.pr} 2000`}
+function confetti(){const cs=['#0F766E','#F59E0B','#2563EB','#DC2626','#16A34A'];for(let i=0;i<28;i++){const d=document.createElement('i');d.className='cf';d.style.cssText=`left:${Math.random()*100}%;background:${cs[i%5]};animation-delay:${Math.random()*.6}s`;document.body.appendChild(d);setTimeout(()=>d.remove(),3500)}}
+async function trip2(t,e){if($('v3').hidden)return;const g=geo(t),arr=t.st==='c'&&g.pr>=g.pf-.001,k=t.st==='d'?4:t.st==='o'?3:arr?2:1,c=R[t.rt].c;
+if(!$('tmapw')||$('tmapw').dataset.k!==String(t.at)){e.innerHTML=`<div id="tban" class="ban"></div><div id="tmapw" data-k="${t.at}">${tmap(t)}</div><div id="tsh" class="tsh"></div>`;const p=$('tp'),L=p.getTotalLength(),at=f=>p.getPointAtLength(L*f);let s='';g.S0.forEach((x,i)=>{const q=at(g.fk(i));s+=`<circle cx="${q.x}" cy="${q.y}" r="${i===g.ui?7:5}" fill="${i===g.ui?c:'#fff'}" stroke="${c}" stroke-width="3"/>`});const q=at(g.pf),d=at(1);s+=`<circle class="pul" cx="${q.x}" cy="${q.y}" r="9" fill="none" stroke="${c}" stroke-width="3"/><circle cx="${d.x}" cy="${d.y}" r="9" fill="#1B1B1B"/><rect x="${d.x-4}" y="${d.y-4}" width="8" height="8" fill="#fff"/>`;$('tcar').insertAdjacentHTML('beforebegin',s);loadChat(t.bid)}
+const eta=t.st==='c'&&!arr?Math.max(1,Math.ceil((1-g.pr/g.pf)*8)):t.st==='o'?Math.max(1,Math.ceil((1-g.pr)*(g.n-g.ui)*2)):0,pg=t.st==='c'?g.pr/g.pf:t.st==='o'?(g.pr-g.pf)/(1-g.pf):1;
+$('tban').className='ban b'+k;$('tban').innerHTML=`<div><small>${['','في الطريق ليك',arr?'وصل! هيستنى 3:00':'وصل!','رحلتك شغالة','خلصت'][k]}</small><b>${['','السواق جاي لنقطتك','السواق وصل '+PTS[t.p],'في الطريق لـ '+DROP[t.dr||0],'وصلت بالسلامة'][k]}</b></div><svg class="ring" width="64" height="64" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="26" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="6"/><circle cx="32" cy="32" r="26" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-dasharray="${163.4*Math.min(1,Math.max(0,pg))} 163.4" transform="rotate(-90 32 32)"/><text x="32" y="38" text-anchor="middle">${k===4?'✓':eta?eta+'د':'●'}</text></svg>`;
+const sig=[t.st,arr,g.cur,rv.n,rv.tags.join(),chatMsgs.length,t.pin].join('|'),sh=$('tsh');
+if(sh.dataset.sig!==sig){sh.dataset.sig=sig;
+const rows=g.S0.map((x,i)=>`<div class="tl ${i<g.cur?'done':i===g.cur?'now':''} ${i===g.ui?'me':''}"><i></i><div><b>${x.n}</b> <span class="mu">${x.t}</span>${i===g.ui?' <span class="chip">نقطتك</span>':''}</div></div>`).join('')+`<div class="tl ${t.st==='d'?'done':''}"><i></i><div><b>${DROP[t.dr||0]}</b> <span class="mu">نزول</span></div></div>`;
+let h=`<div class="row"><div class="row" style="justify-content:flex-start;gap:10px"><span class="av" style="background:${c}">${esc(t.who).slice(0,1)}</span><div><b>${esc(t.who)}</b><div class="mu">${esc(t.car)} · ${esc(t.col)}</div></div></div><div class="pl">${esc(t.pl)}</div></div><div class="row"><span class="mu">${R[t.rt].n}</span><span class="pr">${t.price} جنيه كاش</span></div><div>${rows}</div>`;
+if(arr&&t.st==='c')h+=`<span class="mu">قول الكود للسواق لما تركب</span><div class="pins">${[...t.pin].map((d,i)=>`<b style="animation-delay:${i*.12}s">${d}</b>`).join('')}</div><button class="btn" onclick="st('o')">ركبت</button>`;
+if(t.st==='o')h+=`<button class="btn" onclick="st('d')">وصلت</button>`;
+if(t.st==='d')h+=`<b>قيّم السواق</b><div class="stars">${[1,2,3,4,5].map(i=>`<button aria-label="${i} نجوم" onclick="setStar(${i})">${i<=rv.n?'★':'☆'}</button>`).join('')}</div><div class="tg">${['ملتزم بالميعاد','سواقة هادية','عربية نضيفة','محترم'].map(x=>`<button aria-pressed="${rv.tags.includes(x)}" onclick="tg('${x}')">${x}</button>`).join('')}</div><button class="btn" onclick="rate()" ${rv.n?'':'disabled'}>ابعت التقييم</button>`;
+if(t.st!=='d'){h+=chatH();h+=`<div class="row"><button class="btn g" onclick="shr()">شارك الرحلة</button><a class="btn sos" style="display:flex;align-items:center;text-decoration:none" href="tel:122">طوارئ 122</a></div>`;h+=`<button class="btn g" onclick="cancelBk(${t.bid})">إلغاء الرحلة</button>`}
+sh.innerHTML=h;if(t.st==='d'&&!sh.dataset.cf){sh.dataset.cf=1;confetti()}}
+updMap()}
+function st(x){S.trip.st=x;if(x==='o')S.trip.ob=Date.now();save();renderTrip()}
+function setStar(n){rv.n=n;const sh=$('tsh');if(sh)sh.dataset.sig='';renderTrip()}
+function tg(x){rv.tags=rv.tags.includes(x)?rv.tags.filter(y=>y!==x):[...rv.tags,x];const sh=$('tsh');if(sh)sh.dataset.sig='';renderTrip()}
+async function rate(){const t=S.trip;const{error}=await sb.rpc('rate_booking',{p_booking:t.bid,p_stars:rv.n||5,p_tags:rv.tags});if(error)return toast(error.message);
+S.trip=null;rv={n:0,tags:[]};save();await refreshAll(true);render();tab(4);toast('شكراً على تقييمك.')}
+function shr(){const t=S.trip,x='أنا في مشوار '+R[t.rt].n+' مع '+t.who+'، '+t.car+' '+t.col+'، لوحة '+t.pl+'. نقطة الركوب '+PTS[t.p]+' الساعة '+t.t+'.';
+try{if(navigator.share){navigator.share({text:x}).catch(()=>{})}else{navigator.clipboard.writeText(x);toast('اتنسخت تفاصيل الرحلة. ابعتها لحد قريب منك.')}}catch(e){toast(x)}}
+// chat
+async function loadChat(bid){chatBid=bid;const{data}=await sb.from('messages').select('*').eq('booking_id',bid).order('created_at');chatMsgs=data||[]}
+function chatH(){return `<div class="card" style="margin:0"><b>رسائل السواق</b>${chatMsgs.map(m=>`<div class="msg ${m.sender===ME?'me':''}">${esc(m.body)}</div>`).join('')}<div class="cm">${['أنا واقف عند النقطة','هتأخر 5 دقايق','أنت فين؟'].map(x=>`<button onclick="say('${x}')">${x}</button>`).join('')}</div></div>`}
+async function say(x){if(!chatBid)return;chatMsgs.push({sender:ME,body:x});const sh=$('tsh');if(sh)sh.dataset.sig='';renderTrip();await sb.from('messages').insert({booking_id:chatBid,body:x})}
+// hub (weekly schedule)
+function hub(){const bs=MYBOOKS.filter(b=>['accepted','onboard','pending'].includes(b.st)),H=MYBOOKS.filter(b=>b.st==='done'),nw=new Date(),td=nw.getDay(),ti=td<=4?td:0,nm=nw.getHours()*60+nw.getMinutes();if(hd===null)hd=ti;
+const cov=d=>bs.filter(b=>b.wk||d===ti),items=cov(hd);
+const wk=`<div class="wk">${DAYS5.map((n,d)=>`<button aria-pressed="${hd===d}" onclick="hd=${d};renderTrip()"><span>${n}</span><i class="${cov(d).length?'on':''}"></i><small>${d===ti?'النهارده':' '}</small></button>`).join('')}</div>`;
+const day=items.length?items.map(b=>{const c=R[b.rt].c,df=mn(b.t)-nm,cd=hd===ti?(df>0?'بعد '+fm(df):df>-60?'ميعادك دلوقتي':'فات ميعاد النهارده'):'';
+return `<article class="card" style="border-inline-start:5px solid ${c}"><div class="row"><b style="font-size:22px">${b.t}</b><span class="chip">${b.wk?'اشتراك أسبوعي':bSt(b)}</span></div>${cd?`<span class="mu">${cd}</span>`:''}<div class="rt"><b>${PTS[b.p]}</b><i style="background:${c}"></i><b>${DROP[b.dr||0]}</b></div><div class="row" style="justify-content:flex-start;gap:10px"><span class="av sm" style="background:${c}">${esc(b.who).slice(0,1)}</span><div><b>${esc(b.who)}</b><div class="mu">${esc(b.car)} · ${esc(b.col)}</div></div><div class="pl" style="margin-inline-start:auto">${esc(b.pl)}</div></div><div class="row"><span class="mu">${R[b.rt].n}</span><span class="pr">${b.price} جنيه كاش</span></div><label style="display:flex;align-items:center;gap:8px;font-weight:400"><input type="checkbox" style="width:20px;min-height:20px" ${S.rm[b.bid]?'checked':''} onchange="S.rm[${b.bid}]=this.checked;save()">ذكّرني قبل الركوب بـ 10 دقايق</label><div class="row" style="gap:8px">${hd===ti&&b.st!=='pending'?`<button class="btn" style="flex:1" onclick="trk(${b.rid})">تابع الرحلة</button>`:''}<button class="btn g" style="flex:1" onclick="cancelBk(${b.bid})">إلغاء الحجز</button></div></article>`}).join(''):`<div class="card" style="align-items:center;text-align:center;padding:24px"><svg viewBox="0 0 24 24" width="56" fill="none" stroke="var(--bd)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 10h18"/></svg><b>مفيش مشوار يوم ${DAYS5[hd]}</b><span class="mu">احجز مشوار أو اشترك أسبوعي وهيظهر هنا.</span><button class="btn" onclick="tab(1)">ابحث عن مشوار</button></div>`;
+const sg=RIDES.filter(r=>r.left>0&&!r.mine&&!bs.some(b=>b.rid===r.id)).sort((a,b)=>mt(b)-mt(a))[0];
+const sug=sg?`<div class="card"><div class="row"><b>مشوار مقترح ليك</b><span class="chip">توافق ${mt(sg)}%</span></div><div class="mu">${R[sg.r].n} · ${PTS[sg.pts[0]]} ${pt(sg,sg.pts[0])} ← ${DROP[sg.dr||0]}</div><div class="row"><span class="pr">${sg.price} جنيه</span><button class="btn" onclick="openBk(${sg.id})">احجز</button></div></div>`:'';
+const last=H[0],rep=last?`<div class="card"><b>كرر آخر مشوار</b><span class="mu">${PTS[last.p]} ← ${DROP[last.dr||0]} · ${R[last.rt].n}</span><button class="btn g" onclick="again(${last.p},${last.dr||0})">ابحث عن مشوار زيه</button></div>`:'';
+const sv=H.reduce((a,x)=>a+Math.max(0,200-x.price),0);
+return wk+day+rqH()+sug+rep+`<div class="g2">${sc('رحلاتك',H.length)}${sc('وفّرت تقريباً',sv+' جنيه')}</div>`+(H.length?`<button class="btn g" onclick="tab(4)">شوف سجل كل رحلاتك</button>`:'')}
+function sc(l,v){return `<div class="card" style="margin:0"><span class="mu">${l}</span><b class="pr">${v}</b></div>`}
+function again(p,d){$('f').value=p;$('df').value=d;tab(1);render()}
+// ---------- history ----------
+function hvs(v){hv=v;renderHist()}
+function renderHist(){const H=MYBOOKS.filter(b=>b.st==='done'),e=$('hist'),tb=`<div class="row" style="gap:8px;margin:8px 0"><button class="btn ${hv==='p'?'':'g'}" style="flex:1" onclick="hvs('p')">كراكب</button><button class="btn ${hv==='d'?'':'g'}" style="flex:1" onclick="hvs('d')">كسواق</button></div>`;
+if(hv==='p'){const paid=H.reduce((a,x)=>a+x.price,0),sv=H.reduce((a,x)=>a+Math.max(0,200-x.price),0),av=H.length?(H.reduce((a,x)=>a+(x.stars||0),0)/H.length).toFixed(1):'-';
+e.innerHTML=tb+`<div class="g2">${sc('رحلات',H.length)}${sc('دفعت',paid+' جنيه')}${sc('وفّرت تقريباً*',sv+' جنيه')}${sc('متوسط تقييمك',av+' ★')}</div><span class="mu">*مقارنة بمشوار منفرد بـ 200 جنيه (تقدير).</span>`+(H.length?H.map(x=>`<article class="card"><div class="row"><b><i class="dot" style="background:${R[x.rt].c}"></i>${R[x.rt].n}</b><span class="pr">${x.price} جنيه</span></div><div class="mu">${PTS[x.p]} ${x.t} ← ${DROP[x.dr||0]} · ${ago(x.at)}</div><div class="mu">${esc(x.car)} · ${esc(x.pl)} · ${'★'.repeat(x.stars||0)}</div><button class="btn g" onclick="again(${x.p},${x.dr||0})">ابحث عن مشوار زي ده</button></article>`).join(''):'<p class="mu">لسه ماخلصتش مشاوير.</p>')}
+else{const m=MYRIDES,n=DST.pax||0;
+e.innerHTML=tb+`<div class="g2">${sc('مشاوير نشرتها',m.length)}${sc('ركاب ركبوا',n)}${sc('كاش استلمته',(DST.earned||0)+' جنيه')}${sc('عمولة اتدفعت',(DST.commission||0)+' جنيه')}</div>`+(m.length?m.map(r=>`<article class="card"><div class="row"><b>${R[r.r].n}</b><span class="pr">${r.price} جنيه</span></div><div class="mu">${r.pts.map(i=>PTS[i]+' '+pt(r,i)).join(' ← ')}</div><div class="mu">فاضل ${r.left} من ${r.seats} · النزول: ${DROP[r.dr||0]}</div></article>`).join(''):'<p class="mu">لسه ما نشرتش مشاوير كسواق. روح تاب سواق وانشر أول مشوار.</p>')}}
+
+// ---------- profile ----------
+function profR(){const e=$('prof');if(!PROFILE){e.innerHTML='<p class="mu">بنحمّل حسابك...</p>';return}
+const P=PROFILE,d=document.documentElement;if(S.th)d.dataset.theme=S.th;else delete d.dataset.theme;
+const vf=P.vf||[false,false,false],pc=34+[P.name,vf.every(Boolean),P.em_phone].filter(Boolean).length*22;
+e.innerHTML=`<div class="card"><div class="row"><div class="row" style="justify-content:flex-start;gap:12px"><span class="av" style="background:var(--ac);width:56px;height:56px;font-size:24px">${esc((P.name||'أ').slice(0,1))}</span><div><b>${esc(P.name||'اكتب اسمك')}</b><div class="mu">اكتمال الملف ${pc}%</div></div></div><svg width="56" height="56" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="26" fill="none" stroke="var(--bd)" stroke-width="6"/><circle cx="32" cy="32" r="26" fill="none" stroke="var(--ac)" stroke-width="6" stroke-linecap="round" stroke-dasharray="${1.634*pc} 163.4" transform="rotate(-90 32 32)"/></svg></div><label for="pn">اسمك</label><input id="pn" value="${esc(P.name||'')}" onchange="upProf({name:this.value.trim()})"></div>
+<div class="card"><b>الثقة والتوثيق</b><div class="row"><span>رقم الموبايل</span><span class="chip">متأكد ✓</span></div><div class="row"><span>الرقم القومي</span><span class="chip">${vf[2]?'موثّق ✓':'ناقص'}</span></div><div class="row"><span>رخصة القيادة</span><span class="chip">${vf[0]?'موثّقة ✓':'ناقصة'}</span></div><button class="btn g" onclick="tab(2)">وثّق من تاب السواق</button></div>
+<div class="card"><b>جهة اتصال للطوارئ</b><span class="mu">بنشارك معاها رحلتك لو فعّلت المشاركة التلقائية.</span><input id="tcn" aria-label="الاسم" placeholder="الاسم" value="${esc(P.em_name||'')}" onchange="upProf({em_name:this.value})"><input id="tcp" aria-label="رقم الموبايل" placeholder="رقم الموبايل" inputmode="tel" value="${esc(P.em_phone||'')}" onchange="upProf({em_phone:this.value.trim()})"><label style="display:flex;align-items:center;gap:8px;font-weight:700"><input type="checkbox" style="width:20px;min-height:20px" ${P.auto_share?'checked':''} onchange="upProf({auto_share:this.checked})">شارك رحلتي تلقائياً</label></div>
+<div class="card"><b>المظهر</b><div class="tg">${[['','تلقائي'],['light','فاتح'],['dark','داكن']].map(x=>`<button aria-pressed="${S.th===x[0]}" onclick="S.th='${x[0]}';save();profR()">${x[1]}</button>`).join('')}</div></div>
+<div class="card"><b>ادعي صحابك</b><span class="mu">كودك: <b>${P.ref_code}</b>. ابعته لصحابك يجربوا التطبيق معاك.</span><button class="btn" onclick="inv()">ابعت الدعوة</button></div>`+help()}
+async function upProf(patch){Object.assign(PROFILE,patch);profR();await sb.from('profiles').update(patch).eq('id',ME)}
+function inv(){const x='جرّب مشوار معايا لمشاركة المشاوير من الهرم لزايد: '+location.href+' — كود الدعوة: '+PROFILE.ref_code;try{if(navigator.share)navigator.share({text:x}).catch(()=>{});else{navigator.clipboard.writeText(x);toast('اتنسخت الدعوة.')}}catch(e){toast(x)}}
+function help(){return `<div class="card"><b>مساعدة وأمان</b>${[['الدفع بيتم إزاي؟','الراكب بيدفع كاش للسواق مباشرة. عمولة التطبيق بتتخصم من رصيد السواق.'],['لو السواق ما جاش؟','الغي الحجز من تاب رحلتي وبلّغ من نموذج البلاغ تحت.'],['إزاي أحمي نفسي؟','استخدم كود التأكيد، وشارك رحلتك مع حد قريب، وزرار الطوارئ 122 موجود في شاشة الرحلة.'],['العمولة كام؟','15% من سعر كل راكب، بتتخصم من رصيد السواق بس (قابلة للتعديل قبل الإطلاق).'],['ينفع ألغي؟','أيوه من تاب رحلتي في أي وقت قبل ما تركب.']].map(x=>`<details class="fq"><summary>${x[0]}</summary><p class="mu">${x[1]}</p></details>`).join('')}</div><div class="card"><b>بلّغ عن مشكلة</b><select id="rpk" aria-label="نوع المشكلة"><option>مشكلة مع سواق</option><option>مشكلة مع راكب</option><option>مشكلة في الدفع أو الرصيد</option><option>اقتراح</option></select><textarea id="rpx" rows="3" aria-label="التفاصيل" placeholder="احكيلنا إيه اللي حصل"></textarea><button class="btn" onclick="rpr()">ابعت البلاغ</button></div>`}
+async function rpr(){const t=$('rpx').value.trim();if(!t)return toast('اكتب تفاصيل المشكلة الأول.');await sb.from('reports').insert({kind:$('rpk').value,body:t});$('rpx').value='';toast('وصلنا بلاغك. هنرد عليك.')}
+
+// ---------- wallet ----------
+function wal(){wo=true;bk=null;wst={s:1,a:100,c:false,m:null,go:0,t:'n',ref:'MM'+Math.floor(10000+Math.random()*90000)};wsr()}
+function wcl(){closeBk()}
+function wg(s){wst.s=s;wsr()}
+function wsn(){const b=$('wn');if(b)b.disabled=!(wst.a>=20&&wst.a<=2000)}
+function cpy(x){try{navigator.clipboard.writeText(x)}catch(e){}toast('اتنسخ الكود '+x)}
+const wstep=['المبلغ','طريقة الدفع','التأكيد'];
+function wsr(){if(!wo)return;const w=wst,bal=PROFILE?PROFILE.balance:0,low=bal<30,cmv=Math.max(1,Math.round(45*.15)),ct=s=>`<div style="text-align:center">${s}</div>`;
+const head=`<div class="row"><b>محفظة العمولة</b><button class="btn g" style="min-height:36px" onclick="wcl()">إغلاق</button></div><div class="wh"><div><small>رصيدك</small><div><b>${bal}</b> <small>جنيه</small></div></div><span class="chip" style="background:rgba(255,255,255,.2);color:#fff">${low?'رصيد قليل':'رصيد كويس'}</span></div><div class="wt"><button aria-pressed="${w.t==='n'}" onclick="wst.t='n';wsr()">شحن رصيد</button><button aria-pressed="${w.t==='h'}" onclick="wst.t='h';wsr()">العمليات</button></div>`;
+let body='',foot='';
+if(w.t==='h')body=TX.length?TX.map(x=>`<div class="row"><div class="row" style="justify-content:flex-start;gap:10px"><span class="av sm" style="background:${x.kind==='in'?'var(--ac)':'#6B7280'}">${x.kind==='in'?'+':'−'}</span><div><b style="font-weight:400">${esc(x.label)}</b><div class="mu">${ago(x.created_at)}</div></div></div><b style="color:${x.kind==='in'?'var(--ac)':'var(--tx)'}">${x.kind==='in'?'+':'−'}${x.amount}</b></div>`).join(''):'<span class="mu">لسه مفيش عمليات.</span>';
+else if(w.go===2){body=`<div class="okc"><svg viewBox="0 0 24 24" width="40" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg></div>${ct(`<b style="font-size:20px">اتضاف ${w.a} جنيه</b>`)}${ct(`<span class="mu">رصيدك دلوقتي ${bal} جنيه.</span>`)}`;foot=`<button class="btn" onclick="wcl()">تمام</button>`}
+else if(w.go===1){body=`<div class="radar"><i></i><i></i><b></b></div>${ct('<b>بنضيف رصيدك...</b>')}`}
+else{const sp=`<div class="sp">${[1,2,3].map(i=>`<span class="${w.s>=i?'on':''}">${i}</span>${i<3?`<i class="${w.s>i?'on':''}"></i>`:''}`).join('')}</div><b>${wstep[w.s-1]}</b>`;
+if(w.s===1){body=sp+`${ct(`<b style="font-size:36px">${w.a||0} <span class="mu">جنيه</span></b>`)}<div class="am">${[50,100,200,500].map(x=>`<button aria-pressed="${!w.c&&w.a===x}" onclick="wst.a=${x};wst.c=false;wsr()">${x}</button>`).join('')}</div>${w.c?`<input type="number" inputmode="numeric" aria-label="مبلغ تاني" placeholder="من 20 لـ 2000" value="${[50,100,200,500].includes(w.a)?'':w.a}" oninput="wst.a=+this.value||0;wsn()">`:`<button class="btn g" onclick="wst.c=true;wsr()">مبلغ تاني</button>`}${ct(`<span class="mu">يكفي تقريباً لـ ${Math.floor((w.a||0)/cmv)} راكب بسعر 45 جنيه (عمولة ${cmv} جنيه للراكب).</span>`)}`;foot=`<button class="btn" id="wn" onclick="wg(2)" ${w.a>=20&&w.a<=2000?'':'disabled'}>التالي</button>`}
+else if(w.s===2){body=sp+WM.map((x,i)=>`<button class="pp2" aria-pressed="${w.m===i}" onclick="wst.m=${i};wsr()"><b>${x[0]}</b><span class="tick"></span></button>`).join('')+(w.m!==null?`<div class="card" style="margin:0"><span class="mu">${WM[w.m][1]}: <b>[بيتحدد قبل الإطلاق]</b></span><span class="mu">المبلغ: <b>${w.a} جنيه</b></span><div class="cp"><span>${w.ref}</span><button class="btn g" style="min-height:36px" onclick="cpy('${w.ref}')">نسخ الكود</button></div><span class="mu">اكتب الكود ده في ملاحظات التحويل عشان نربطه بحسابك.</span></div>`:'');foot=`<button class="btn g" onclick="wg(1)">رجوع</button><button class="btn" onclick="wg(3)" ${w.m===null?'disabled':''}>التالي</button>`}
+else{body=sp+`<div class="card" style="margin:0"><div class="row"><span class="mu">المبلغ</span><b>${w.a} جنيه</b></div><div class="row"><span class="mu">الطريقة</span><b>${WM[w.m][0]}</b></div><div class="row"><span class="mu">الكود</span><b>${w.ref}</b></div></div><span class="mu">في النسخة دي الشحن بيتحسب فوراً للتجربة. عند الإطلاق الرسمي هترفع إيصال التحويل وبيتراجع قبل إضافة الرصيد.</span>`;foot=`<button class="btn g" onclick="wg(2)">رجوع</button><button class="btn" onclick="wsend()">أكدت التحويل</button>`}}
+$('bk').innerHTML=`<div class="card ws">${head}<div class="wb">${body}</div>${foot?`<div class="wf">${foot}</div>`:''}</div>`}
+async function wsend(){wst.go=1;wsr();const{data,error}=await sb.rpc('topup_wallet',{p_amount:wst.a,p_method:WM[wst.m][0],p_ref:wst.ref});
+if(error){wst.go=0;wsr();return toast(error.message)}
+PROFILE.balance=data;await refreshTx();wst.go=2;wsr();render()}
+// ---------- ride requests ----------
+function rqf(){bk=null;$('bk').innerHTML=`<div class="card" style="max-height:88vh;overflow:auto"><div class="row"><b>اطلب مشوار</b><button class="btn g" style="min-height:36px" onclick="closeBk()">إغلاق</button></div><span class="mu">اكتب اللي محتاجه والسواقين اللي معدّيين على طريقك هيشوفوه.</span><label for="rqp">هتركب منين؟</label><select id="rqp">${ord().map(i=>`<option value="${i}">${PTS[i]}</option>`).join('')}</select><label for="rqd2">رايح فين؟</label><select id="rqd2">${og()}</select><label for="rqt">الميعاد</label><input id="rqt" type="time" value="07:30"><button class="btn" onclick="rqs()">ابعت الطلب</button></div>`;$('rqp').value=$('f').value||3;$('rqd2').value=$('df').value||8}
+async function rqs(){const row={p:+$('rqp').value,d:+$('rqd2').value,t:norm($('rqt').value||'07:30'),who:(PROFILE&&PROFILE.name)||'أنا'};
+const{error}=await sb.from('ride_requests').insert(row);if(error)return toast(error.message);
+closeBk();await refreshRqs();render();toast('اتبعت طلبك للسواقين. هنبلغك لما حد يعدّي على طريقك.')}
+async function rqx(id){await sb.from('ride_requests').delete().eq('id',id);await refreshRqs();render();toast('اتلغى الطلب.')}
+function rqH(){const L=RQS.filter(x=>x.user_id===ME);return L.length?`<div class="card"><b>طلباتك</b>${L.map(x=>`<div class="row"><div><b style="font-weight:400">${PTS[x.p]} ← ${DROP[x.d]}</b><div class="mu">${x.t} · في انتظار سواق</div></div><button class="btn g" style="min-height:36px" onclick="rqx(${x.id})">إلغاء</button></div>`).join('')}</div>`:''}
+function rqd(){const L=RQS;return `<div class="card"><b>طلبات ركاب (${L.length})</b><span class="mu">ركاب مستنيين مشوار على طريقك. اضغط وانشر مشوارك بسرعة.</span>${L.length?L.map(x=>`<div class="row"><div><b style="font-weight:400">${PTS[x.p]} ← ${DROP[x.d]}</b><div class="mu">${x.t} · ${esc(x.who||'راكب')}</div></div>${x.user_id===ME?'<span class="chip">طلبك</span>':`<button class="btn" style="min-height:36px" onclick="fillRq(${x.id})">عندي مشوار</button>`}</div>`).join(''):'<span class="mu">مفيش طلبات دلوقتي.</span>'}</div>`}
+function fillRq(id){const x=RQS.find(y=>y.id===id);if(!x)return;tab(2);if($('v2').classList.contains('cl'))tg2();document.querySelectorAll('.pp').forEach(e=>e.checked=+e.value===x.p);$('dr').value=x.d;$('time').value=x.t.padStart(5,'0');man={};ttRender();ps=1;psr();toast('جهزنالك المشوار. اكتب بيانات عربيتك وكمّل.')}
+
+// ---------- pickers / custom points ----------
+function ord(){return PTS.map((n,i)=>i).filter(i=>PTS[i]).sort((a,b)=>(OFF[a]||0)-(OFF[b]||0))}
+const og=()=>DG.map(g=>`<optgroup label="${g[0]}">`+DROP.slice(g[1],g[2]).map((p,j)=>`<option value="${g[1]+j}">${p}</option>`).join('')+'</optgroup>').join('');
+function pkt(){const a=$('f').value,b=$('df').value,ch='<svg viewBox="0 0 24 24" width="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>';$('pk1').innerHTML='<span>'+(a===''?'كل النقاط':PTS[a])+'</span>'+ch;$('pk2').innerHTML='<span>'+(b===''?'كل الأماكن':DROP[b])+'</span>'+ch;promoR()}
+function promoR(){if($('promo').children.length)return;const P=[['linear-gradient(135deg,#C2410C,#9A3412)','وفّر 10% باشتراك أسبوعي','احجز مرة وامشي 5 أيام','tab(1)'],['linear-gradient(135deg,#2563EB,#1E3A8A)','ادعي صاحبك','شاركه اللينك وخليه يجرب','tab(5)'],['linear-gradient(135deg,#7C3AED,#4C1D95)','كون سواق موثّق','وثّق حسابك وخد شارة وحجوزات أكتر','tab(2)'],['linear-gradient(135deg,#0F766E,#0B4F4A)','مش لاقي مشوار؟','اطلب مشوارك والسواقين هيشوفوه','rqf()']];$('promo').innerHTML=P.map(x=>`<button class="pc" style="background:${x[0]}" onclick="${x[3]}"><b>${x[1]}</b><span>${x[2]}</span></button>`).join('')}
+function pkr(k){bk=null;$('bk').innerHTML=`<div class="card" style="max-height:88vh"><div class="row"><b>${k===1?'هتركب منين؟':'رايح فين في زايد؟'}</b><button class="btn g" style="min-height:36px" onclick="closeBk()">إغلاق</button></div><input id="pq" aria-label="بحث" placeholder="ابحث عن مكان" oninput="pkl(${k})"><div id="pkl" class="wb"></div></div>`;pkl(k)}
+function pkl(k){const q=($('pq').value||'').trim(),L=k===1?PTS:DROP,cur=$(k===1?'f':'df').value,rc=(S.rc||[]).filter(x=>x.k===k),row=(i,t)=>`<button class="pp2" aria-pressed="${String(i)===cur}" onclick="pks(${k},'${i}')"><b>${t}</b><span class="tick"></span></button>`;
+let h=(k===1?`<button class="btn g" onclick="cpf('p')">+ مكاني مش موجود؟ ضيفه</button>`:'')+(q?'':row('','الكل'));if(!q&&rc.length)h+='<span class="mu">آخر اختياراتك</span>'+rc.map(x=>row(x.i,L[x.i])).join('');
+if(k===1)h+=ord().filter(i=>PTS[i].includes(q)).map(i=>row(i,PTS[i])).join('');else DG.forEach(g=>{const m=L.map((t,i)=>[t,i]).slice(g[1],g[2]).filter(x=>x[0].includes(q));if(m.length)h+=`<span class="mu" style="margin-top:6px">${g[0]}</span>`+m.map(x=>row(x[1],x[0])).join('')});
+$('pkl').innerHTML=h||'<span class="mu">مفيش نتايج.</span>'}
+function pks(k,i){const n=i===''?'':+i;$(k===1?'f':'df').value=n;if(n!==''){S.rc=[{k,i:n},...(S.rc||[]).filter(x=>!(x.k===k&&x.i===n))].slice(0,6)}save();closeBk();skl()}
+function selr(){const cur=$('f').value,ch=new Set([...document.querySelectorAll('.pp:checked')].map(e=>+e.value));$('f').innerHTML='<option value="">كل النقاط</option>'+ord().map(i=>`<option value="${i}">${PTS[i]}</option>`).join('');$('f').value=cur;$('pp').innerHTML=ord().map(i=>`<label><input class="pp" type="checkbox" value="${i}" onchange="ttRender()" ${ch.has(i)?'checked':''}>${PTS[i]}${i>12?' ★':''}</label>`).join('');ttRender()}
+function cpf(ctx){bk=null;$('bk').innerHTML=`<div class="card" style="max-height:88vh;overflow:auto"><div class="row"><b>ضيف مكان تاني</b><button class="btn g" style="min-height:36px" onclick="closeBk()">إغلاق</button></div><span class="mu">لو مكانك مش في القايمة، حدده بالنسبة لأقرب نقطة على الطريق. النقطة هتظهر لكل المستخدمين.</span><label for="cpn">اسم المكان</label><input id="cpn" placeholder="مثلاً: أمام مستشفى الهرم"><label for="cpa">بعد أنهي نقطة؟</label><select id="cpa">${ord().map(i=>`<option value="${i}">${PTS[i]}</option>`).join('')}</select><label for="cpm">بعدها بكام دقيقة؟</label><input id="cpm" type="number" min="1" max="10" value="2"><span class="er" id="cpe" role="alert"></span><button class="btn" onclick="cps('${ctx}')">إضافة</button></div>`}
+async function cps(ctx){const n=$('cpn').value.trim(),a=+$('cpa').value,m=+$('cpm').value||0,e=$('cpe');if(!n)return e.textContent='اكتب اسم المكان.';if(PTS.includes(n))return e.textContent='المكان ده موجود بالفعل.';
+const nx=ord().find(i=>(OFF[i]||0)>(OFF[a]||0)),gap=nx===undefined?10:(OFF[nx]||0)-(OFF[a]||0);if(gap<2)return e.textContent='مفيش مسافة كافية بعد '+PTS[a]+'. اختار نقطة تانية.';if(m<1||m>=gap)return e.textContent='لازم يكون بين 1 و'+(gap-1)+' دقيقة بعد '+PTS[a]+'.';
+const{data,error}=await sb.from('custom_points').insert({name:n,off_minutes:(OFF[a]||0)+m,km:+(((KM[a]||0)+m*14/60).toFixed(1))}).select().single();
+if(error)return e.textContent='حصلت مشكلة: '+error.message;
+PTS[data.id]=n;OFF[data.id]=data.off_minutes;KM[data.id]=+data.km;selr();closeBk();
+if(ctx==='d'){const x=document.querySelector('.pp[value="'+data.id+'"]');if(x){x.checked=true;ttRender()}}else pks(1,String(data.id));toast('اتضافت: '+n+'.')}
+function nxr(){const h=new Date().getHours(),b=S.trip||MYBOOKS.find(x=>['accepted','onboard','pending'].includes(x.st));$('gr').textContent=h<12?'صباح الخير':h<18?'مساء الخير':'مساء النور';$('nx').innerHTML=b?`<div class="nx"><div><b>رحلتك الجاية</b><div class="mu">${PTS[b.p]} ${b.t} ← ${DROP[b.dr||0]}${b.wk?' · اشتراك أسبوعي':''}</div></div><button class="btn" onclick="${S.trip?'tab(3)':`trk(${b.rid});`}">تابع</button></div>`:''}
+
+// ---------- onboarding / boot ----------
+function obStart(){if(S.ob)return;oi=0;obr();$('ob').hidden=false}
+function obr(){const s=OBS[oi];$('ob').innerHTML=`<h1 style="margin-top:8px">${s[0]}</h1><p class="mu" style="max-width:300px">${s[1]}</p><div class="dots">${OBS.map((_,i)=>`<span class="${i===oi?'on':''}"></span>`).join('')}</div><button class="btn" style="width:100%;max-width:320px" onclick="obn()">${oi===OBS.length-1?'يلا نبدأ':'التالي'}</button><button class="btn g" style="border:0" onclick="obz()">تخطي</button>`}
+function obn(){if(oi<OBS.length-1){oi++;obr()}else obz()}
+function obz(){$('ob').hidden=true;S.ob=1;save()}
+async function reset(){try{await sb.auth.signOut()}catch(e){}localStorage.removeItem(K);location.reload()}
+async function poll(){try{await refreshAll(true);if(!$('v1').hidden||!$('v2').hidden)render();if(S.trip)renderTrip();if(chatBid)loadChat(chatBid).then(()=>{const sh=$('tsh');if(sh)sh.dataset.sig='';renderTrip()})}catch(e){}}
+(async function boot(){
+  await loadPoints();
+  map();selr();
+  $('rt').innerHTML=R.map((r,i)=>`<option value="${i}">${r.n}</option>`).join('');
+  $('dr').innerHTML=og();$('df').innerHTML='<option value="">كل الأماكن</option>'+og();
+  ttRender();cm();
+  const{data:{session}}=await sb.auth.getSession();
+  if(!session){const{error}=await sb.auth.signInAnonymously();if(error){toast('مشكلة في الاتصال: '+error.message)}}
+  const{data:{user}}=await sb.auth.getUser();
+  ME=user&&user.id;
+  if(ME){await loadProfile();await refreshAll(false);await refreshStats()}
+  render();tab(1);
+  setTimeout(()=>{$('sp').style.opacity=0;setTimeout(()=>$('sp').remove(),500)},1200);
+  setTimeout(obStart,1300);
+  setInterval(poll,15000);
+  setInterval(updMap,250);
+  try{sb.channel('live').on('postgres_changes',{event:'*',schema:'public',table:'bookings'},()=>poll()).on('postgres_changes',{event:'*',schema:'public',table:'rides'},()=>poll()).subscribe()}catch(e){}
+})();
+
+</script>
+</body>
+</html>
