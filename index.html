@@ -31,7 +31,7 @@ label{display:block;font-weight:700;font-size:14px;margin:8px 0 4px}
 input,select{width:100%;box-sizing:border-box;min-height:44px;background:var(--card);color:var(--tx);border:1px solid var(--bd);border-radius:12px;padding:8px 12px;font:400 16px Cairo,sans-serif}
 .pts{display:flex;gap:12px;flex-wrap:wrap}.pts label{display:flex;align-items:center;gap:6px;font-weight:400;margin:0}.pts input{width:20px;min-height:20px}
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-#mapw{border-radius:14px;overflow:hidden;background:#EAE6DA;margin:10px 0}#mapw svg{display:block;width:100%;height:130px}
+#mapw{border-radius:14px;overflow:hidden;background:#EAE6DA;margin:10px 0}#mapw svg{display:block;width:100%;height:130px}#mapw iframe{display:block;width:100%;height:190px;border:0}
 .rt,.cr{transition:opacity .3s}
 #toast{position:fixed;left:16px;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));max-width:448px;margin:0 auto;background:var(--tx);color:var(--bg);border-radius:12px;padding:12px 16px;font-weight:700;display:none;z-index:5}
 .er{color:var(--er);font-weight:700;min-height:22px}
@@ -94,8 +94,8 @@ body{padding-bottom:calc(72px + env(safe-area-inset-bottom,0px))}
 .seats{display:flex;gap:2px}.seats svg{width:20px;height:20px;fill:var(--ac)}.seats svg.e{fill:var(--bd)}
 .sk{height:150px;border-radius:14px;margin:10px 0;background:linear-gradient(90deg,var(--card) 25%,var(--soft) 50%,var(--card) 75%);background-size:200% 100%;animation:shim 1s infinite}@keyframes shim{to{background-position:-200% 0}}
 .nav svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}.nav button[aria-selected="true"] svg{background:var(--soft);padding:3px 16px;box-sizing:content-box;border-radius:14px}
-#ob[hidden]{display:none}
-#ob{position:fixed;inset:0;z-index:20;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:32px;text-align:center}
+#ob[hidden],#au[hidden]{display:none}
+#ob,#au{position:fixed;inset:0;z-index:20;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:32px;text-align:center}#au label{align-self:flex-start;max-width:320px;width:100%}#au input{max-width:320px;width:100%}
 .ob svg{width:130px;height:auto}.ob i{display:inline-block;animation:bob 1.4s ease-in-out infinite}@keyframes bob{50%{transform:translateY(-12px)}}
 .dots{display:flex;gap:6px}.dots span{width:8px;height:8px;border-radius:4px;background:var(--bd);transition:all .3s}.dots span.on{width:24px;background:var(--ac)}
 .nx{display:flex;justify-content:space-between;align-items:center;gap:8px;background:var(--soft);border:1px solid var(--ac);border-radius:16px;padding:10px 14px;margin-top:12px}
@@ -170,11 +170,11 @@ textarea{width:100%;box-sizing:border-box;background:var(--card);color:var(--tx)
 <section id="v3" hidden><h2>رحلتي</h2><p class="mu" style="margin:-4px 0 8px">حجوزاتك وجدولك الأسبوعي وتتبع الرحلة في مكان واحد</p><div id="trip"></div></section>
 <section id="v5" hidden><h2>حسابي</h2><div id="prof"></div></section>
 <section id="v4" hidden><h2>سجل مشاويري</h2><div id="hist"></div></section>
-<p class="mu">المشاوير والحجوزات دلوقتي حقيقية ومتشاركة بين كل المستخدمين. المشاوير المعلمة "موثّق ✓" من كباتن جربوا التطبيق. الخريطة رسم تقريبي مش بالمقياس.</p>
+<p class="mu">المشاوير والحجوزات دلوقتي حقيقية ومتشاركة بين كل المستخدمين. المشاوير المعلمة "موثّق ✓" من كباتن جربوا التطبيق. الخريطة حقيقية من جوجل مابس.</p>
 <button class="btn g" onclick="reset()">تسجيل الخروج من الجهاز ده</button>
 </div>
 <div id="bk" onclick="if(event.target===this)closeBk()"></div>
-<div id="ob" hidden></div><svg style="display:none" aria-hidden="true"><symbol id="pe" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7z"/></symbol></svg>
+<div id="ob" hidden></div><div id="au" hidden></div><svg style="display:none" aria-hidden="true"><symbol id="pe" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7z"/></symbol></svg>
 <div id="sp"><span aria-hidden="true"><svg viewBox="0 0 64 30" width="140" style="display:block;transform:scaleX(-1)"><path d="M4 20V15Q4 12 8 11L16 10L22 3Q23 2 25 2H41Q43 2 44 3L50 10L58 12Q61 13 61 16V20Q61 22 59 22H5Q4 22 4 20Z" fill="currentColor"/><path d="M24 4H41L47 10H19Z" fill="var(--ac)"/><circle cx="17" cy="23" r="5.5" fill="#1B1B1B"/><circle cx="17" cy="23" r="2" fill="#fff"/><circle cx="48" cy="23" r="5.5" fill="#1B1B1B"/><circle cx="48" cy="23" r="2" fill="#fff"/></svg></span>مشوار معايا</div>
 <nav class="nav" role="tablist"><button role="tab" id="n1" aria-selected="true" onclick="tab(1)"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>مشاوير</button><button role="tab" id="n3" aria-selected="false" onclick="tab(3)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6 7-11a7 7 0 10-14 0c0 5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>رحلتي</button><button role="tab" id="n2" aria-selected="false" onclick="tab(2)"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="2"/><path d="M12 14v7M3.5 10.5L10 12M20.5 10.5L14 12"/></svg>سواق</button><button role="tab" id="n4" aria-selected="false" onclick="tab(4)"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>سجل</button><button role="tab" id="n5" aria-selected="false" onclick="tab(5)"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg>حسابي</button></nav>
 <div id="toast" role="status"></div>
@@ -183,6 +183,8 @@ textarea{width:100%;box-sizing:border-box;background:var(--card);color:var(--tx)
 const SUPA_URL='https://dbvzfcerkbhdolmocujm.supabase.co';
 const SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRidnpmY2Vya2JoZG9sbW9jdWptIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQ2NDIxNjAsImV4cCI6MjExMDIxODE2MH0.Bb7HzibF8dd_aSh0V_rxtpT6Byw6lH-ERnPZ9nYQcWc';
 const sb=supabase.createClient(SUPA_URL,SUPA_KEY);
+let ME_ANON=true,ME_EMAIL='',AU_RES=null,AU_MODE='in';
+sb.auth.onAuthStateChange(ev=>{if(ev==='PASSWORD_RECOVERY'){const e=document.getElementById('au');AU_MODE='pw';e.hidden=false;e.innerHTML=`<h1 style="margin-top:8px">كلمة سر جديدة</h1><p class="mu" style="max-width:300px">وصلت من لينك استرجاع كلمة السر. اكتب كلمة سر جديدة لحسابك.</p><input id="aup" type="password" dir="ltr" placeholder="٦ حروف على الأقل"><span class="er" id="aerr" role="alert"></span><button class="btn" style="width:100%;max-width:320px" onclick="auNewPw()">حفظ كلمة السر</button>`}});
 
 // ---------- static geography (fallback; replaced from DB at boot) ----------
 const R=[{n:'الصحراوي المباشر',c:'#0F766E',d:'M330,360 Q250,240 60,60',s:'6s'},{n:'الدائري ← محور 26 يوليو',c:'#C2410C',d:'M330,360 Q340,90 60,60',s:'7s'},{n:'محور عمرو بن العاص',c:'#6D28D9',d:'M330,360 C260,240 150,110 60,60',s:'6.5s'},{n:'كمال عامر / أحمد عرابي',c:'#1D4ED8',d:'M330,360 Q130,380 60,60',s:'8s'},{n:'وصلة دهشور',c:'#4D7C0F',d:'M330,360 Q40,440 60,60',s:'9s'}];
@@ -226,11 +228,11 @@ function nsh(){const n=S.nt||[];closeBk();$('bk').innerHTML=`<div class="card"><
 function closeBk(){wo=false;bk=null;bp=null;$('bk').innerHTML=''}
 function tab(n){for(let i=1;i<=5;i++){$('v'+i).hidden=i!==n;$('n'+i).setAttribute('aria-selected',i===n)}hl(n===3&&S.trip?S.trip.rt:n===2?+$('rt').value:null);extra()}
 function hl(i){document.querySelectorAll('#mapw .rt,#mapw .cr').forEach(e=>e.style.opacity=(i===null||i===''||+e.dataset.i===+i)?1:.15)}
-function map(){let s='<svg viewBox="0 0 390 420" role="img" aria-label="خريطة تقريبية لخمس طرق من الهرم إلى الشيخ زايد">';
-R.forEach((r,i)=>s+=`<path class="rt" data-i="${i}" id="r${i}" d="${r.d}" fill="none" stroke="${r.c}" stroke-width="4" stroke-linecap="round"/>`);
-R.forEach((r,i)=>[0,1].forEach(k=>s+=`<g class="cr" data-i="${i}"><rect x="-9" y="-5" width="18" height="10" rx="3" fill="${r.c}" stroke="#fff" stroke-width="1.5"/><rect x="-1" y="-3.5" width="6" height="7" rx="1.5" fill="#fff" opacity=".85"/><animateMotion dur="${r.s}" begin="-${k*parseFloat(r.s)/2}s" repeatCount="indefinite" rotate="auto"><mpath href="#r${i}"/></animateMotion></g>`));
-s+='<circle cx="330" cy="360" r="8" fill="#1B1B1B"/><text x="330" y="391" text-anchor="middle" font-size="14" font-weight="700" fill="#1B1B1B" font-family="Cairo,sans-serif">الهرم</text><circle cx="60" cy="60" r="8" fill="#1B1B1B"/><text x="60" y="40" text-anchor="middle" font-size="14" font-weight="700" fill="#1B1B1B" font-family="Cairo,sans-serif">الشيخ زايد</text></svg>';
-$('mapw').innerHTML=s;if(matchMedia('(prefers-reduced-motion: reduce)').matches)$('mapw').firstChild.pauseAnimations()}
+const GM=(q,z)=>`https://www.google.com/maps?q=${encodeURIComponent(q)}&z=${z||11}&hl=ar&output=embed`;
+const GMD=(a,b)=>`https://www.google.com/maps?saddr=${encodeURIComponent(a)}&daddr=${encodeURIComponent(b)}&hl=ar&output=embed`;
+function map(){$('mapw').innerHTML=`<iframe title="خريطة جوجل للطريق من الهرم للشيخ زايد" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="${GM('الشيخ زايد، الجيزة',11)}"></iframe>`}
+function mapSel(){const el=$('mapw');if(!el)return;const fr=el.querySelector('iframe');if(!fr)return;const f=$('f').value,d=$('df').value;
+fr.src=(f===''&&d==='')?GM('الشيخ زايد، الجيزة',11):GMD(f!==''?PTS[f]+'، الهرم، الجيزة':'الهرم، الجيزة',d!==''?DROP[d]+'، الشيخ زايد، الجيزة':'الشيخ زايد، الجيزة')}
 // ---------- data loading ----------
 async function loadPoints(){
   try{
@@ -336,7 +338,7 @@ let rt='-',tr=0,tags=[];try{const{data}=await sb.rpc('driver_rating',{p_driver:r
 $('bk').innerHTML=`<div class="card" style="max-height:88vh;overflow:auto"><div class="row"><b><i class="dot" style="background:${c}"></i>${R[r.r].n}</b><button class="btn g" style="min-height:36px" onclick="closeBk()">إغلاق</button></div><div class="row" style="justify-content:flex-start;gap:12px"><span class="av" style="background:${c}">${esc(r.who).slice(0,1)}</span><div><b>${esc(r.who)}</b> ${isVf(r)?'<span class="chip">موثّق ✓</span>':''}<div class="mu">★ ${rt}${tr?' · '+tr+' رحلة':''}</div></div></div><div class="mu">${esc(r.car)} · ${esc(r.col)} · ${esc(r.pl)}</div><div>${r.pts.map((i,k)=>`<div class="tl ${k===0?'done':''}"><i></i><div><b>${PTS[i]}</b> <span class="mu">${pt(r,i)}</span></div></div>`).join('')}<div class="tl"><i></i><div><b>${DROP[r.dr||0]}</b> <span class="mu">${r.ar?'وصول تقريباً '+r.ar:'نزول'}</span></div></div></div>${(r.vb||[]).length?`<div class="bd">${r.vb.map(i=>`<span>${VB[i]}</span>`).join('')}</div>`:''}${r.days&&r.days.length?`<span class="mu">بيكرر: ${dayStr(r.days)}</span>`:''}<b>قواعد المشوار</b><span class="mu">الدفع كاش للسواق · السواق بيستنى 3 دقايق بس عند النقطة · تقدر تلغي من تاب رحلتي.</span>${tags.length?'<b>آراء الركاب</b>'+tags.map(t=>`<div class="card" style="margin:0"><span class="mu">${esc(t)}</span></div>`).join(''):''}<div class="row"><span>السعر</span><b class="pr">${r.price} جنيه</b></div><span class="mu">توفير حوالي ${sv} جنيه مقارنة بمشوار منفرد بـ 200 جنيه (تقدير).</span><button class="btn" ${r.left?'':'disabled'} onclick="openBk(${r.id})">${r.left?'احجز مقعد':'اكتمل'}</button></div>`}
 function wa(id){const r=RIDES.find(x=>x.id===id);if(!r)return;const x='مشوار '+R[r.r].n+': '+r.pts.map(i=>PTS[i]+' '+pt(r,i)).join(' ← ')+' ← '+DROP[r.dr||0]+'. '+r.price+' جنيه للمقعد، متبقي '+r.left+' مقاعد. من تطبيق مشوار معايا.';window.open('https://wa.me/?text='+encodeURIComponent(x),'_blank')}
 function fvt(id){S.fv=S.fv||[];S.fv=fv(id)?S.fv.filter(x=>x!==id):[...S.fv,id];save();render();toast(fv(id)?'اتضاف للمفضلة.':'اتشال من المفضلة.')}
-function skl(){$('rides').innerHTML='<div class="sk"></div><div class="sk"></div>';clearTimeout(skl.i);skl.i=setTimeout(render,350)}
+function skl(){mapSel();$('rides').innerHTML='<div class="sk"></div><div class="sk"></div>';clearTimeout(skl.i);skl.i=setTimeout(render,350)}
 function clr(){$('f').value='';$('df').value='';$('wf').checked=false;skl()}
 
 // ---------- driver console ----------
@@ -389,13 +391,13 @@ return trip2(t,e)}
 function geo(t){const S0=stops(t),n=S0.length,ui=Math.max(0,S0.findIndex(x=>x.i===t.p)),now=Date.now(),fk=k=>.1+.75*k/Math.max(1,n-1),pf=fk(ui);
 const pr=t.st==='c'?pf*Math.min(1,(now-t.at)/(6000*(ui+1))):t.st==='o'?pf+(1-pf)*Math.min(1,(now-(t.ob||now))/(8000*(n-ui))):1;
 return{S0,n,ui,fk,pf,pr,cur:S0.reduce((a,x,k)=>fk(k)<=pr+1e-9?k:a,0)}}
-function tmap(t){const c=R[t.rt].c,d=R[t.rt].d,bl=[[20,40,60,40],[110,30,50,60],[300,60,70,50],[40,150,50,60],[250,170,60,40],[60,300,80,50],[160,330,60,40],[320,250,50,60],[200,120,40,40],[100,220,50,50]],tx='font-size="13" font-weight="700" fill="#1B1B1B" font-family="Cairo,sans-serif" text-anchor="middle"';
-return `<svg viewBox="0 20 390 400" role="img" aria-label="خريطة الرحلة" style="width:100%;height:320px;display:block;background:#EAE6DA;border-radius:18px"><g fill="#DDD8CA">${bl.map(b=>`<rect x="${b[0]}" y="${b[1]}" width="${b[2]}" height="${b[3]}" rx="8"/>`).join('')}</g><path d="${d}" fill="none" stroke="#fff" stroke-width="12" stroke-linecap="round"/><path id="tp" d="${d}" fill="none" stroke="${c}" stroke-width="5" stroke-linecap="round" opacity=".35"/><path id="tpd" d="${d}" fill="none" stroke="${c}" stroke-width="5" stroke-linecap="round" stroke-dasharray="0 2000"/><text x="330" y="384" ${tx}>الهرم</text><text x="60" y="42" ${tx}>الشيخ زايد</text><g id="tcar" style="transition:transform .25s linear"><g transform="translate(-17,-8) scale(.55)"><path d="M4 20V15Q4 12 8 11L16 10L22 3Q23 2 25 2H41Q43 2 44 3L50 10L58 12Q61 13 61 16V20Q61 22 59 22H5Q4 22 4 20Z" fill="${c}" stroke="#fff" stroke-width="2.5"/><path d="M24 4H41L47 10H19Z" fill="#fff"/><circle cx="17" cy="23" r="5.5" fill="#1B1B1B"/><circle cx="48" cy="23" r="5.5" fill="#1B1B1B"/></g></g></svg>`}
+function tmap(t){
+return `<iframe title="خريطة الرحلة على جوجل مابس" loading="lazy" referrerpolicy="no-referrer-when-downgrade" style="width:100%;height:320px;border:0;display:block;border-radius:18px;background:#EAE6DA" src="${GMD(PTS[t.p]+'، الهرم، الجيزة',DROP[t.dr||0]+'، الشيخ زايد، الجيزة')}"></iframe>`}
 function updMap(){const t=S.trip,p=$('tp');if(!t||!p||$('v3').hidden)return;const g=geo(t),L=p.getTotalLength(),q=p.getPointAtLength(L*g.pr),a=p.getPointAtLength(L*Math.min(1,g.pr+.012)),b=p.getPointAtLength(L*Math.max(0,g.pr-.012)),dx=g.pr>=1?q.x-b.x:a.x-q.x,dy=g.pr>=1?q.y-b.y:a.y-q.y;
 $('tcar').style.transform=`translate(${q.x}px,${q.y}px) rotate(${Math.atan2(dy,dx)*180/Math.PI}deg)${dx<0?' scaleY(-1)':''}`;$('tpd').style.strokeDasharray=`${L*g.pr} 2000`}
 function confetti(){const cs=['#0F766E','#F59E0B','#2563EB','#DC2626','#16A34A'];for(let i=0;i<28;i++){const d=document.createElement('i');d.className='cf';d.style.cssText=`left:${Math.random()*100}%;background:${cs[i%5]};animation-delay:${Math.random()*.6}s`;document.body.appendChild(d);setTimeout(()=>d.remove(),3500)}}
 async function trip2(t,e){if($('v3').hidden)return;const g=geo(t),arr=t.st==='c'&&g.pr>=g.pf-.001,k=t.st==='d'?4:t.st==='o'?3:arr?2:1,c=R[t.rt].c;
-if(!$('tmapw')||$('tmapw').dataset.k!==String(t.at)){e.innerHTML=`<div id="tban" class="ban"></div><div id="tmapw" data-k="${t.at}">${tmap(t)}</div><div id="tsh" class="tsh"></div>`;const p=$('tp'),L=p.getTotalLength(),at=f=>p.getPointAtLength(L*f);let s='';g.S0.forEach((x,i)=>{const q=at(g.fk(i));s+=`<circle cx="${q.x}" cy="${q.y}" r="${i===g.ui?7:5}" fill="${i===g.ui?c:'#fff'}" stroke="${c}" stroke-width="3"/>`});const q=at(g.pf),d=at(1);s+=`<circle class="pul" cx="${q.x}" cy="${q.y}" r="9" fill="none" stroke="${c}" stroke-width="3"/><circle cx="${d.x}" cy="${d.y}" r="9" fill="#1B1B1B"/><rect x="${d.x-4}" y="${d.y-4}" width="8" height="8" fill="#fff"/>`;$('tcar').insertAdjacentHTML('beforebegin',s);loadChat(t.bid)}
+if(!$('tmapw')||$('tmapw').dataset.k!==String(t.at)){e.innerHTML=`<div id="tban" class="ban"></div><div id="tmapw" data-k="${t.at}">${tmap(t)}</div><div id="tsh" class="tsh"></div>`;loadChat(t.bid)}
 const eta=t.st==='c'&&!arr?Math.max(1,Math.ceil((1-g.pr/g.pf)*8)):t.st==='o'?Math.max(1,Math.ceil((1-g.pr)*(g.n-g.ui)*2)):0,pg=t.st==='c'?g.pr/g.pf:t.st==='o'?(g.pr-g.pf)/(1-g.pf):1;
 $('tban').className='ban b'+k;$('tban').innerHTML=`<div><small>${['','في الطريق ليك',arr?'وصل! هيستنى 3:00':'وصل!','رحلتك شغالة','خلصت'][k]}</small><b>${['','السواق جاي لنقطتك','السواق وصل '+PTS[t.p],'في الطريق لـ '+DROP[t.dr||0],'وصلت بالسلامة'][k]}</b></div><svg class="ring" width="64" height="64" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="26" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="6"/><circle cx="32" cy="32" r="26" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-dasharray="${163.4*Math.min(1,Math.max(0,pg))} 163.4" transform="rotate(-90 32 32)"/><text x="32" y="38" text-anchor="middle">${k===4?'✓':eta?eta+'د':'●'}</text></svg>`;
 const sig=[t.st,arr,g.cur,rv.n,rv.tags.join(),chatMsgs.length,t.pin].join('|'),sh=$('tsh');
@@ -445,6 +447,7 @@ function profR(){const e=$('prof');if(!PROFILE){e.innerHTML='<p class="mu">بن�
 const P=PROFILE,d=document.documentElement;if(S.th)d.dataset.theme=S.th;else delete d.dataset.theme;
 const vf=P.vf||[false,false,false],pc=34+[P.name,vf.every(Boolean),P.em_phone].filter(Boolean).length*22;
 e.innerHTML=`<div class="card"><div class="row"><div class="row" style="justify-content:flex-start;gap:12px"><span class="av" style="background:var(--ac);width:56px;height:56px;font-size:24px">${esc((P.name||'أ').slice(0,1))}</span><div><b>${esc(P.name||'اكتب اسمك')}</b><div class="mu">اكتمال الملف ${pc}%</div></div></div><svg width="56" height="56" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="26" fill="none" stroke="var(--bd)" stroke-width="6"/><circle cx="32" cy="32" r="26" fill="none" stroke="var(--ac)" stroke-width="6" stroke-linecap="round" stroke-dasharray="${1.634*pc} 163.4" transform="rotate(-90 32 32)"/></svg></div><label for="pn">اسمك</label><input id="pn" value="${esc(P.name||'')}" onchange="upProf({name:this.value.trim()})"></div>
+${ME_ANON?`<div class="card"><b>احفظ حسابك</b><span class="mu">حسابك دلوقتي مؤقت على الجهاز ده بس، ولو مسحت بيانات المتصفح هتفقده. ضيف إيميل وكلمة سر عشان تدخل بيهم من أي جهاز.</span><label for="sve">الإيميل</label><input id="sve" type="email" inputmode="email" dir="ltr" placeholder="name@example.com" autocomplete="email"><label for="svp">كلمة السر</label><input id="svp" type="password" dir="ltr" placeholder="٦ حروف على الأقل" autocomplete="new-password"><span class="er" id="svr" role="alert"></span><button class="btn" onclick="saveAcct()">احفظ حسابي</button></div>`:`<div class="card"><b>حسابك</b><div class="row"><span>الإيميل</span><span class="chip" dir="ltr">${esc(ME_EMAIL||'')}</span></div><span class="mu">حسابك محفوظ، تقدر تسجل دخولك بالإيميل ده من أي جهاز.</span></div>`}
 <div class="card"><b>الثقة والتوثيق</b><div class="row"><span>رقم الموبايل</span><span class="chip">متأكد ✓</span></div><div class="row"><span>الرقم القومي</span><span class="chip">${vf[2]?'موثّق ✓':'ناقص'}</span></div><div class="row"><span>رخصة القيادة</span><span class="chip">${vf[0]?'موثّقة ✓':'ناقصة'}</span></div><button class="btn g" onclick="tab(2)">وثّق من تاب السواق</button></div>
 <div class="card"><b>جهة اتصال للطوارئ</b><span class="mu">بنشارك معاها رحلتك لو فعّلت المشاركة التلقائية.</span><input id="tcn" aria-label="الاسم" placeholder="الاسم" value="${esc(P.em_name||'')}" onchange="upProf({em_name:this.value})"><input id="tcp" aria-label="رقم الموبايل" placeholder="رقم الموبايل" inputmode="tel" value="${esc(P.em_phone||'')}" onchange="upProf({em_phone:this.value.trim()})"><label style="display:flex;align-items:center;gap:8px;font-weight:700"><input type="checkbox" style="width:20px;min-height:20px" ${P.auto_share?'checked':''} onchange="upProf({auto_share:this.checked})">شارك رحلتي تلقائياً</label></div>
 <div class="card"><b>المظهر</b><div class="tg">${[['','تلقائي'],['light','فاتح'],['dark','داكن']].map(x=>`<button aria-pressed="${S.th===x[0]}" onclick="S.th='${x[0]}';save();profR()">${x[1]}</button>`).join('')}</div></div>
@@ -506,6 +509,24 @@ PTS[data.id]=n;OFF[data.id]=data.off_minutes;KM[data.id]=+data.km;selr();closeBk
 if(ctx==='d'){const x=document.querySelector('.pp[value="'+data.id+'"]');if(x){x.checked=true;ttRender()}}else pks(1,String(data.id));toast('اتضافت: '+n+'.')}
 function nxr(){const h=new Date().getHours(),b=S.trip||MYBOOKS.find(x=>['accepted','onboard','pending'].includes(x.st));$('gr').textContent=h<12?'صباح الخير':h<18?'مساء الخير':'مساء النور';$('nx').innerHTML=b?`<div class="nx"><div><b>رحلتك الجاية</b><div class="mu">${PTS[b.p]} ${b.t} ← ${DROP[b.dr||0]}${b.wk?' · اشتراك أسبوعي':''}</div></div><button class="btn" onclick="${S.trip?'tab(3)':`trk(${b.rid});`}">تابع</button></div>`:''}
 
+// ---------- auth screens ----------
+const EML=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+function auErr(m){m=String(m||'');if(/invalid login/i.test(m))return 'الإيميل أو كلمة السر غلط.';if(/already been registered|already registered/i.test(m))return 'الإيميل ده مسجل قبل كده، جرب تسجل دخولك بدل ما تعمل حساب.';if(/at least 6/i.test(m))return 'كلمة السر لازم تكون 6 حروف على الأقل.';if(/valid email|unable to validate/i.test(m))return 'اكتب إيميل صحيح.';if(/rate limit|too many|security purposes/i.test(m))return 'محاولات كتير، استنى دقيقة وجرب تاني.';return 'حصلت مشكلة: '+m}
+function auShow(mode){AU_MODE=mode;const e=$('au');e.hidden=false;const inn=mode==='in';
+e.innerHTML=`<h1 style="margin-top:8px">مشوار معايا</h1><p class="mu" style="max-width:300px">${inn?'سجل دخولك بالإيميل عشان حسابك يفضل محفوظ على أي جهاز.':'اعمل حساب جديد بالإيميل وكلمة سر. حسابك هيفضل معاك حتى لو مسحت بيانات المتصفح.'}</p><label for="aue">الإيميل</label><input id="aue" type="email" inputmode="email" dir="ltr" placeholder="name@example.com" autocomplete="email"><label for="aup">كلمة السر</label><input id="aup" type="password" dir="ltr" placeholder="٦ حروف على الأقل" autocomplete="${inn?'current-password':'new-password'}"><span class="er" id="aerr" role="alert"></span><button class="btn" style="width:100%;max-width:320px" onclick="auGo()">${inn?'دخول':'إنشاء الحساب'}</button><button class="btn g" style="border:0" onclick="auShow('${inn?'up':'in'}')">${inn?'معندكش حساب؟ اعمل حساب':'عندك حساب؟ سجل دخولك'}</button>${inn?'<button class="btn g" style="border:0" onclick="auReset()">نسيت كلمة السر؟</button>':''}<button class="btn g" style="border:0" onclick="auGuest()">كمّل كضيف من غير حساب</button>`}
+async function auGo(){const em=$('aue').value.trim(),pw=$('aup').value,e=$('aerr');if(!EML.test(em))return e.textContent='اكتب إيميل صحيح.';if(pw.length<6)return e.textContent='كلمة السر لازم تكون 6 حروف على الأقل.';e.textContent='ثانية...';
+const r=AU_MODE==='in'?await sb.auth.signInWithPassword({email:em,password:pw}):await sb.auth.signUp({email:em,password:pw});
+if(r.error)return e.textContent=auErr(r.error.message);
+if(AU_MODE==='up'&&!r.data.session)return e.textContent='الحساب اتعمل. افتح إيميلك وأكده لو وصلك لينك، وبعدين سجل دخولك.';
+auDone()}
+async function auGuest(){const{error}=await sb.auth.signInAnonymously();if(error)return $('aerr').textContent=auErr(error.message);auDone()}
+async function auReset(){const em=$('aue').value.trim(),e=$('aerr');if(!EML.test(em))return e.textContent='اكتب إيميلك فوق الأول وبعدين دوس هنا.';const{error}=await sb.auth.resetPasswordForEmail(em,{redirectTo:location.origin+location.pathname});if(error)return e.textContent=auErr(error.message);e.textContent='';toast('بعتنا لينك على إيميلك تعيد منه تعيين كلمة السر.')}
+async function auNewPw(){const pw=$('aup').value,e=$('aerr');if(pw.length<6)return e.textContent='كلمة السر لازم تكون 6 حروف على الأقل.';const{error}=await sb.auth.updateUser({password:pw});if(error)return e.textContent=auErr(error.message);$('au').hidden=true;toast('كلمة السر اتغيرت.')}
+function auDone(){$('au').hidden=true;if(AU_RES){const r=AU_RES;AU_RES=null;r()}}
+async function saveAcct(){const em=$('sve').value.trim(),pw=$('svp').value,e=$('svr');if(!EML.test(em))return e.textContent='اكتب إيميل صحيح.';if(pw.length<6)return e.textContent='كلمة السر لازم تكون 6 حروف على الأقل.';e.textContent='ثانية...';
+const{error}=await sb.auth.updateUser({email:em,password:pw});if(error)return e.textContent=auErr(error.message);
+ME_ANON=false;ME_EMAIL=em;profR();toast('اتحفظ حسابك. تقدر تدخل بالإيميل ده من أي جهاز.')}
+
 // ---------- onboarding / boot ----------
 function obStart(){if(S.ob)return;oi=0;obr();$('ob').hidden=false}
 function obr(){const s=OBS[oi];$('ob').innerHTML=`<h1 style="margin-top:8px">${s[0]}</h1><p class="mu" style="max-width:300px">${s[1]}</p><div class="dots">${OBS.map((_,i)=>`<span class="${i===oi?'on':''}"></span>`).join('')}</div><button class="btn" style="width:100%;max-width:320px" onclick="obn()">${oi===OBS.length-1?'يلا نبدأ':'التالي'}</button><button class="btn g" style="border:0" onclick="obz()">تخطي</button>`}
@@ -520,9 +541,9 @@ async function poll(){try{await refreshAll(true);if(!$('v1').hidden||!$('v2').hi
   $('dr').innerHTML=og();$('df').innerHTML='<option value="">كل الأماكن</option>'+og();
   ttRender();cm();
   const{data:{session}}=await sb.auth.getSession();
-  if(!session){const{error}=await sb.auth.signInAnonymously();if(error){toast('مشكلة في الاتصال: '+error.message)}}
+  if(!session)await new Promise(r=>{AU_RES=r;auShow('in')});
   const{data:{user}}=await sb.auth.getUser();
-  ME=user&&user.id;
+  ME=user&&user.id;ME_ANON=!!(user&&user.is_anonymous);ME_EMAIL=(user&&user.email)||'';
   if(ME){await loadProfile();await refreshAll(false);await refreshStats()}
   render();tab(1);
   setTimeout(()=>{$('sp').style.opacity=0;setTimeout(()=>$('sp').remove(),500)},1200);
