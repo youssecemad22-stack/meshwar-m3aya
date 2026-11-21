@@ -290,7 +290,7 @@ body:has(#au:not([hidden])) .language-floating,body:has(#ob:not([hidden])) .lang
 .rc>.btn{margin-top:2px}.rc>.mu{font-size:11px;line-height:1.7}
 .promo{gap:10px;margin:26px 0 0;scroll-snap-type:x mandatory}.pc{background:var(--soft)!important;border:1px solid var(--bd);color:var(--tx);box-shadow:none;min-width:230px;max-width:250px;border-radius:18px;text-align:start;padding:18px;scroll-snap-align:start}
 .pc:after{display:none}.pc b{color:var(--ac);font-size:14px}.pc span{font-size:11px;color:var(--mu)}
-.nav{bottom:0;left:0;right:0;max-width:520px;border-radius:24px 24px 0 0;border:1px solid var(--bd);border-bottom:0;background:var(--card);box-shadow:0 -4px 25px -15px rgba(0,40,25,.25);padding:9px 10px calc(10px + env(safe-area-inset-bottom,0px));display:grid;grid-template-columns:repeat(5,1fr);gap:3px;backdrop-filter:none;overflow:visible}
+.nav{bottom:0;left:0;right:0;max-width:520px;border-radius:24px 24px 0 0;border:1px solid var(--bd);border-bottom:0;background:var(--card);box-shadow:0 -4px 25px -15px rgba(0,40,25,.25);padding:9px 10px calc(10px + env(safe-area-inset-bottom,0px));display:grid;grid-template-columns:repeat(auto-fit,minmax(52px,1fr));gap:3px;backdrop-filter:none;overflow:visible}
 .nav button{min-width:0;min-height:53px;gap:4px;font-size:10px;position:relative;border-radius:14px;transition:background .2s;color:var(--mu)}
 .nav button svg,.nav button[aria-selected="true"] svg{width:22px;height:22px;padding:0;background:none;border-radius:0;box-sizing:border-box;transform:none;stroke-width:1.7}
 .nav button[aria-selected="true"]{background:var(--soft);color:var(--ac)}
@@ -405,6 +405,7 @@ details.ad{flex-basis:100%;margin-top:6px}details.ad summary{cursor:pointer;font
 .frow .sw svg{width:16px}
 .nav{overflow-x:auto;scrollbar-width:none}
 .nav::-webkit-scrollbar{display:none}
+[hidden]{display:none!important}
 </style>
 </head>
 <body>

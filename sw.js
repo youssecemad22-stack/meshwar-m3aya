@@ -1,5 +1,5 @@
 /* Increment VERSION for every app-shell release. Never store API, auth, or user data here. */
-const VERSION = 'meshwar-pwa-20261121-geo-1';
+const VERSION = 'meshwar-pwa-20261121-geo-2';
 const BASE = new URL('./', self.location).pathname;
 const SHELL = [BASE, BASE + 'index.html', BASE + 'ui.js', BASE + 'app.js', BASE + 'pwa.js', BASE + 'manifest.webmanifest', BASE + 'icon-192.png', BASE + 'icon-512.png', BASE + 'icon-maskable-512.png', BASE + 'apple-touch-icon.png'];
 const SDK = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
