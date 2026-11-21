@@ -426,6 +426,9 @@ details.ad{flex-basis:100%;margin-top:6px}details.ad summary{cursor:pointer;font
 @keyframes check-draw{from{stroke-dashoffset:30}to{stroke-dashoffset:0}}
 #bk>.pkcard{animation:place-sheet .3s cubic-bezier(.2,.8,.2,1)}.pkresults>.pkline:nth-of-type(-n+6){animation:place-enter .22s ease-out both}.pkresults>.pkline:nth-of-type(2){animation-delay:.025s}.pkresults>.pkline:nth-of-type(3){animation-delay:.05s}.pkresults>.pkline:nth-of-type(4){animation-delay:.075s}.pkresults>.pkline:nth-of-type(5){animation-delay:.1s}.pkresults>.pkline:nth-of-type(6){animation-delay:.125s}.pkchip,.pkstar,.qpbuttons button,#rtbar button{transition:transform .15s ease,background .15s ease,border-color .15s ease}.pkchip:active,.pkstar:active,.qpbuttons button:active,#rtbar button:active{transform:scale(.96)}.pkstar[aria-pressed=true] svg{animation:saved-pop .28s ease-out}.locb.spin{animation:location-glow 1.3s ease-in-out infinite}.locb.spin svg{animation:spin 1s linear infinite}.nav svg{transition:transform .18s ease}.nav button:active svg{transform:scale(.88)}.okc svg path{stroke-dasharray:30;animation:check-draw .45s ease-out both}.w>section:not([hidden]){animation:place-enter .2s ease-out both}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-delay:0ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+
+/* Keep setup and publish steps ahead of driver statistics. */
+#v2>#vfc{order:-3}#v2>#cta{order:-2}#v2>:nth-child(3){order:-1}#v2>:nth-child(4){order:0}
 </style>
 </head>
 <body>
