@@ -119,8 +119,8 @@ function uiInit(){
     b.addEventListener('keydown',e=>{const all=[...b.parentElement.children];let next;if(e.key==='Home')next=0;else if(e.key==='End')next=all.length-1;else if(e.key==='ArrowRight'||e.key==='ArrowLeft'){const dir=document.documentElement.dir==='rtl'?-1:1;next=(i+(e.key==='ArrowRight'?dir:-dir)+all.length)%all.length}else return;e.preventDefault();all[next].focus();all[next].click()});
   });
   const hero=document.querySelector('.hero');
-  hero.querySelector('.hc:first-child small').insertAdjacentHTML('afterbegin',uiIcon('route'));
-  hero.querySelector('.hc:last-child small').insertAdjacentHTML('afterbegin',uiIcon('pin'));
+  hero?.querySelector('.hc:first-child small')?.insertAdjacentHTML('afterbegin',uiIcon('route'));
+  hero?.querySelector('.hc:last-child small')?.insertAdjacentHTML('afterbegin',uiIcon('pin'));
   const wallet=top.querySelector('.chip');wallet.insertAdjacentHTML('afterbegin',uiIcon('wallet'));
   const intro=top.nextElementSibling;intro.classList.add('brand-caption');
   const footer=document.querySelector('.w>p:last-of-type');
@@ -134,4 +134,3 @@ function uiInit(){
   uiApply();
 }
 uiInit();
-
