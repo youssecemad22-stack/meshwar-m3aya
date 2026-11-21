@@ -90,7 +90,11 @@ Deno.serve(async (req) => {
     (cps || []).forEach((c: { id: number; name: string; off_minutes: number | null }) => { PTS[c.id] = c.name; OFF[c.id] = c.off_minutes || 0; });
 
     const { data: r } = await sb.from('rides').select('*').eq('id', rideId).maybeSingle();
-    if (r && (r.status === 'open' || r.status === 'active')) {
+    // Same eligibility rule the app uses for public rides (app.js publicRide():
+    // !!r && !r.demo && r.st==='open'). Only those get a real per-ride card.
+    // Demo rides and unavailable/hidden ones (active/done/cancelled) fall
+    // through to the generic card, so a shared link never leaks their details.
+    if (r && !r.is_demo && r.status === 'open') {
       const pts: number[] = Array.isArray(r.pts) ? r.pts : [];
       const route = ROUTES[r.route] || '';
       const chain = pts
