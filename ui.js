@@ -34,6 +34,7 @@ function uiText(s){
   return out;
 }
 const uiOriginal = new WeakMap(), uiAttrs = new WeakMap();
+Object.assign(UI_COPY,{'وجهاتك السريعة':['وجهاتك السريعة','Your shortcuts'],'أماكنك المحفوظة · على الجهاز ده بس':['أماكنك المحفوظة · على هذا الجهاز فقط','Saved places · on this device only'],'حفظ المكان':['حفظ المكان','Save place'],'إزالة من المحفوظة':['إزالة من المحفوظة','Remove saved place'],'اتحفظ على الجهاز ده بس':['تم الحفظ على هذا الجهاز فقط','Saved on this device only'],'اتشال من المحفوظة':['تمت الإزالة من المحفوظة','Removed from saved places'],'تقدر تحفظ ١٦ مكان. شيل مكان قديم الأول.':['يمكن حفظ ١٦ مكانًا. أزل مكانًا قديمًا أولًا.','You can save 16 places. Remove one first.']});
 const uiIcons = {
  search:'<circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4.5 4.5"/>',
  route:'<circle cx="6" cy="5" r="2"/><circle cx="18" cy="19" r="2"/><path d="M8 5h7a4 4 0 0 1 0 8H9a3 3 0 0 0 0 6h7"/>',
