@@ -1,7 +1,7 @@
 /* Increment VERSION for every app-shell release. Never store API, auth, or user data here. */
-const VERSION = 'meshwar-pwa-20261121-safety-2';
+const VERSION = 'meshwar-pwa-20261121-push-1';
 const BASE = new URL('./', self.location).pathname;
-const SHELL = [BASE, BASE + 'index.html', BASE + 'drivers.html', BASE + 'ui.js', BASE + 'app.js', BASE + 'pwa.js', BASE + 'manifest.webmanifest', BASE + 'icon-192.png', BASE + 'icon-512.png', BASE + 'icon-maskable-512.png', BASE + 'apple-touch-icon.png'];
+const SHELL = [BASE, BASE + 'index.html', BASE + 'drivers.html', BASE + 'ui.js', BASE + 'app.js', BASE + 'pwa.js', BASE + 'push.js', BASE + 'manifest.webmanifest', BASE + 'icon-192.png', BASE + 'icon-512.png', BASE + 'icon-maskable-512.png', BASE + 'apple-touch-icon.png'];
 const SDK = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
 self.addEventListener('install', event => {
   event.waitUntil((async () => {
@@ -45,5 +45,40 @@ self.addEventListener('fetch', event => {
     const cache = await caches.open(VERSION);
     const cached = await cache.match(isShell ? url.pathname : SDK);
     return cached || fetch(request);
+  })());
+});
+
+// Web push: show a system notification, or hand it to a focused app window instead.
+self.addEventListener('push', event => {
+  let data = {};
+  try { data = event.data ? event.data.json() : {}; } catch (_) { try { data = { body: event.data.text() }; } catch (_) {} }
+  const title = data.title || 'مشوار معايا';
+  const body = data.body || '';
+  const url = data.url || './';
+  event.waitUntil((async () => {
+    const wins = await self.clients.matchAll({ type: 'window', includeUncontrolled: true });
+    for (const w of wins) w.postMessage({ type: 'push-received', title, body, url });
+    if (wins.some(w => w.focused)) return;
+    await self.registration.showNotification(title, {
+      body,
+      icon: BASE + 'icon-192.png',
+      badge: BASE + 'icon-192.png',
+      tag: data.tag || 'meshwar',
+      renotify: true,
+      dir: 'rtl',
+      lang: 'ar',
+      data: { url }
+    });
+  })());
+});
+self.addEventListener('notificationclick', event => {
+  event.notification.close();
+  const url = (event.notification.data && event.notification.data.url) || './';
+  event.waitUntil((async () => {
+    const wins = await self.clients.matchAll({ type: 'window', includeUncontrolled: true });
+    for (const w of wins) {
+      if (w.url.startsWith(self.location.origin)) { await w.focus(); return; }
+    }
+    await self.clients.openWindow(new URL(url, self.location).href);
   })());
 });
