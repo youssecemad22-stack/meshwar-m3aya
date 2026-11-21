@@ -2,8 +2,8 @@
 const SUPA_URL='https://dbvzfcerkbhdolmocujm.supabase.co';
 const SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRidnpmY2Vya2JoZG9sbW9jdWptIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQ2NDIxNjAsImV4cCI6MjExMDIxODE2MH0.Bb7HzibF8dd_aSh0V_rxtpT6Byw6lH-ERnPZ9nYQcWc';
 const sb=supabase.createClient(SUPA_URL,SUPA_KEY);
-const SHARE_BASE='https://dbvzfcerkbhdolmocujm.supabase.co/functions/v1/ride-share';
-const shareUrl=id=>SHARE_BASE+'?id='+id;
+const SHARE_BASE='https://youssecemad22-stack.github.io/meshwar-m3aya/share/';
+const shareUrl=id=>SHARE_BASE+id+'/';
 let ME_ANON=true,ME_EMAIL='',AU_RES=null,AU_MODE='in';
 sb.auth.onAuthStateChange(ev=>{if(ev==='PASSWORD_RECOVERY'){const e=document.getElementById('au');AU_MODE='pw';e.hidden=false;e.innerHTML=`<h1 style="margin-top:8px">كلمة سر جديدة</h1><p class="mu" style="max-width:300px">وصلت من لينك استرجاع كلمة السر. اكتب كلمة سر جديدة لحسابك.</p><input id="aup" type="password" dir="ltr" placeholder="٦ حروف على الأقل"><span class="er" id="aerr" role="alert"></span><button class="btn" style="width:100%;max-width:320px" onclick="auNewPw()">حفظ كلمة السر</button>`}});
 

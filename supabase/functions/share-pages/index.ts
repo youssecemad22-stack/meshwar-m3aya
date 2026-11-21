@@ -1,13 +1,14 @@
-// ride-share: public share page for one ride.
-// Link scrapers (WhatsApp, Facebook, ...) read the Open Graph tags from this
-// HTML without running JavaScript; people are redirected to the app deep link
-// (/?ride=<id>) which opens the ride details after sign-in.
-// Reads the ride with the built-in service role key and returns only the
-// fields a public share preview needs (route, points, price, seats left).
+// share-pages: fired by the rides table trigger (share_page_dispatch) via
+// pg_net. Regenerates the static share card for one ride on GitHub Pages
+// (share/<id>/index.html) through the GitHub Contents API.
+// Auth: shared x-hook-secret header (app_config + HOOK_SECRET env secret).
 import { createClient } from 'npm:@supabase/supabase-js@2.45.4';
 
 const APP = 'https://youssecemad22-stack.github.io/meshwar-m3aya/';
 const COVER = APP + 'og-cover.png';
+const GH_REPO = 'youssecemad22-stack/meshwar-m3aya';
+const HOOK_SECRET = Deno.env.get('HOOK_SECRET') ?? '';
+const GITHUB_PAT = Deno.env.get('GITHUB_PAT') ?? '';
 
 // Catalog fallbacks mirroring app.js; DB points/custom_points override them.
 const ROUTES = ["الصحراوي المباشر", "الدائري ← محور 26 يوليو", "محور عمرو بن العاص", "كمال عامر / أحمد عرابي", "وصلة دهشور"];
@@ -18,6 +19,7 @@ const AREA_NAMES = ["وسط البلد", "ميدان التحرير", "العت�
 
 const GENERIC_TITLE = 'مشوار معايا | مشاركة مشاوير الهرم والشيخ زايد';
 const GENERIC_DESC = 'احجز مقعدك مع سواق من منطقتك، أو انشر مشوارك وقسّم التكلفة.';
+const ENDED_DESC = 'المشوار ده خلص أو اتلغى. افتح التطبيق وشوف المشاوير المتاحة.';
 
 function esc(s: unknown): string {
   return String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c] as string);
@@ -50,51 +52,75 @@ function page(title: string, desc: string, target: string): string {
     + '<script>location.replace(' + JSON.stringify(target) + ');</scr' + 'ipt>\n</body>\n</html>';
 }
 
+
+function b64(s: string): string {
+  const bytes = new TextEncoder().encode(s);
+  let bin = '';
+  for (let i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i]);
+  return btoa(bin);
+}
+
+function json(obj: unknown, status = 200) {
+  return new Response(JSON.stringify(obj), { status, headers: { 'Content-Type': 'application/json' } });
+}
+
 Deno.serve(async (req) => {
-  const url = new URL(req.url);
-  const id = Number(url.searchParams.get('id') || '0');
+  if (!HOOK_SECRET || req.headers.get('x-hook-secret') !== HOOK_SECRET) return json({ error: 'unauthorized' }, 401);
+  if (!GITHUB_PAT) return json({ error: 'missing GITHUB_PAT' }, 500);
+  let rideId = 0;
+  try { rideId = Number((await req.json()).ride_id) || 0; } catch (_) { /* ignore */ }
+  if (!rideId) return json({ error: 'ride_id required' }, 400);
+
   const sb = createClient(Deno.env.get('SUPABASE_URL') ?? '', Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? '');
+  let title = GENERIC_TITLE, desc = ENDED_DESC, target = APP;
 
-  let title = GENERIC_TITLE, desc = GENERIC_DESC, target = APP;
+  try {
+    const [{ data: base }, { data: cps }] = await Promise.all([
+      sb.from('points').select('kind,id,name,off_minutes'),
+      sb.from('custom_points').select('id,name,off_minutes'),
+    ]);
+    if (base && base.length) {
+      PTS = []; OFF = []; DROP = [];
+      base.forEach((p: { kind: string; id: number; name: string; off_minutes: number | null }) => {
+        if (p.kind === 'pickup') { PTS[p.id] = p.name; OFF[p.id] = p.off_minutes || 0; }
+        else DROP[p.id] = p.name;
+      });
+    }
+    AREA_NAMES.forEach((n: string, k: number) => { PTS[100 + k] = n; OFF[100 + k] = 0; DROP[29 + k] = n; });
+    (cps || []).forEach((c: { id: number; name: string; off_minutes: number | null }) => { PTS[c.id] = c.name; OFF[c.id] = c.off_minutes || 0; });
 
-  if (id > 0) {
-    try {
-      // Mirror loadPoints() in app.js: DB points replace the base catalog.
-      const [{ data: base }, { data: cps }] = await Promise.all([
-        sb.from('points').select('kind,id,name,off_minutes'),
-        sb.from('custom_points').select('id,name,off_minutes'),
-      ]);
-      if (base && base.length) {
-        PTS = []; OFF = []; DROP = [];
-        base.forEach((p: { kind: string; id: number; name: string; off_minutes: number | null }) => {
-          if (p.kind === 'pickup') { PTS[p.id] = p.name; OFF[p.id] = p.off_minutes || 0; }
-          else DROP[p.id] = p.name;
-        });
-      }
-      AREA_NAMES.forEach((n: string, k: number) => { PTS[100 + k] = n; OFF[100 + k] = 0; DROP[29 + k] = n; });
-      (cps || []).forEach((c: { id: number; name: string; off_minutes: number | null }) => { PTS[c.id] = c.name; OFF[c.id] = c.off_minutes || 0; });
+    const { data: r } = await sb.from('rides').select('*').eq('id', rideId).maybeSingle();
+    if (r && (r.status === 'open' || r.status === 'active')) {
+      const pts: number[] = Array.isArray(r.pts) ? r.pts : [];
+      const route = ROUTES[r.route] || '';
+      const chain = pts
+        .filter(i => PTS[i])
+        .map(i => PTS[i] + ' ' + ((r.tt && r.tt[i]) || tm(r.t, (OFF[i] || 0) - (OFF[pts[0]] || 0))))
+        .join(' ← ');
+      const drop = DROP[r.dr || 0] || '';
+      title = (route ? 'مشوار ' + route : 'مشوار معايا') + ' · ' + r.price + ' جنيه';
+      desc = (chain ? chain + (drop ? ' ← ' + drop : '') + '. ' : '')
+        + r.price + ' جنيه للمقعد، متبقي ' + r.left + ' مقاعد. من تطبيق مشوار معايا.';
+      target = APP + '?ride=' + rideId;
+    }
+  } catch (_) { /* fall back to the ended card */ }
 
-      const { data: r } = await sb.from('rides').select('*').eq('id', id).maybeSingle();
-      if (r && (r.status === 'open' || r.status === 'active')) {
-        const pts: number[] = Array.isArray(r.pts) ? r.pts : [];
-        const route = ROUTES[r.route] || '';
-        const chain = pts
-          .filter(i => PTS[i])
-          .map(i => PTS[i] + ' ' + ((r.tt && r.tt[i]) || tm(r.t, (OFF[i] || 0) - (OFF[pts[0]] || 0))))
-          .join(' ← ');
-        const drop = DROP[r.dr || 0] || '';
-        title = (route ? 'مشوار ' + route : 'مشوار معايا') + ' · ' + r.price + ' جنيه';
-        desc = (chain ? chain + (drop ? ' ← ' + drop : '') + '. ' : '')
-          + r.price + ' جنيه للمقعد، متبقي ' + r.left + ' مقاعد. من تطبيق مشوار معايا.';
-        target = APP + '?ride=' + id;
-      }
-    } catch (_) { /* fall back to the generic card */ }
+  const html = page(title, desc, target);
+  const path = 'share/' + rideId + '/index.html';
+  const gh = { Authorization: 'Bearer ' + GITHUB_PAT, 'User-Agent': 'meshwar-share-pages', Accept: 'application/vnd.github+json' };
+
+  const cur = await fetch('https://api.github.com/repos/' + GH_REPO + '/contents/' + path + '?ref=main', { headers: gh });
+  let sha: string | undefined;
+  if (cur.ok) {
+    const existing = await cur.json();
+    sha = existing.sha;
+    if ((existing.content || '').replace(/\n/g, '') === b64(html)) return json({ ok: true, changed: false });
   }
 
-  return new Response(page(title, desc, target), {
-    headers: {
-      'content-type': 'text/html; charset=utf-8',
-      'cache-control': 'public, max-age=60',
-    },
+  const put = await fetch('https://api.github.com/repos/' + GH_REPO + '/contents/' + path, {
+    method: 'PUT',
+    headers: { ...gh, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ message: 'Share card for ride ' + rideId, content: b64(html), branch: 'main', ...(sha ? { sha } : {}) }),
   });
+  return json({ ok: put.status < 300, changed: put.status < 300, github_status: put.status });
 });
