@@ -66,7 +66,9 @@ body{padding-bottom:calc(72px + env(safe-area-inset-bottom,0px))}
 #sp{position:fixed;inset:0;background:var(--ac);color:var(--on);z-index:9;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;font-size:28px;font-weight:700;transition:opacity .5s}
 #sp span{font-size:56px;animation:drive2 1.2s ease-out}
 .seat{letter-spacing:2px;color:var(--ac)}
-.cm{display:flex;flex-wrap:wrap;gap:6px}.cm button{border:1px solid var(--bd);background:var(--card);color:var(--tx);border-radius:16px;padding:6px 12px;font:400 14px Cairo,sans-serif;min-height:36px}
+.cm{display:flex;flex-wrap:wrap;gap:6px}
+.cmrow{display:flex;gap:8px;margin-top:8px}
+.cmrow input{flex:1;min-width:0;margin:0}.cm button{border:1px solid var(--bd);background:var(--card);color:var(--tx);border-radius:16px;padding:6px 12px;font:400 14px Cairo,sans-serif;min-height:36px}
 .msg{background:var(--soft);border-radius:10px;padding:6px 10px;font-size:14px;align-self:flex-start}.msg.me{align-self:flex-end}
 .pp2{display:flex;justify-content:space-between;align-items:center;width:100%;text-align:right;border:2px solid var(--bd);background:var(--card);color:var(--tx);border-radius:12px;padding:10px 12px;margin-bottom:6px;font:400 15px Cairo,sans-serif;min-height:56px}
 .pp2[aria-pressed="true"]{border-color:var(--ac);background:var(--soft)}
@@ -428,7 +430,7 @@ details.ad{flex-basis:100%;margin-top:6px}details.ad summary{cursor:pointer;font
 </head>
 <body>
 <div class="w">
-<div class="top"><h1 style="display:flex;align-items:center;gap:8px"><span class="lg"><svg viewBox="0 0 48 48" width="20" fill="none" stroke="#fff" stroke-width="4.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 34V19c0-5 7-5 8.8-1l2 5.6c.9 2.4 3.5 2.4 4.4 0l2-5.6c1.8-4 8.8-4 8.8 1v15"/><circle cx="12" cy="34" r="4.6" fill="#fff" stroke="none"/><circle cx="38" cy="34" r="5.2" fill="#A9F2D2" stroke="none"/><circle cx="38" cy="34" r="1.9" fill="#0B4F4A" stroke="none"/></svg></span>مشوار معايا</h1><div style="display:flex;align-items:center;gap:8px"><button class="chip" style="border:0;font-family:inherit;color:inherit;cursor:pointer" aria-label="المحفظة" onclick="wal()">الرصيد: <span id="bal"></span> جنيه</button><button class="bellb" aria-label="الإشعارات" onclick="nsh()"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9a6 6 0 0112 0c0 6 2 7 2 7H4s2-1 2-7"/><path d="M10 20a2 2 0 004 0"/></svg><i id="bdg" hidden></i></button></div></div>
+<div class="top"><h1 style="display:flex;align-items:center;gap:8px"><span class="lg"><svg viewBox="0 0 48 48" width="20" fill="none" stroke="#fff" stroke-width="4.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 34V19c0-5 7-5 8.8-1l2 5.6c.9 2.4 3.5 2.4 4.4 0l2-5.6c1.8-4 8.8-4 8.8 1v15"/><circle cx="12" cy="34" r="4.6" fill="#fff" stroke="none"/><circle cx="38" cy="34" r="5.2" fill="#A9F2D2" stroke="none"/><circle cx="38" cy="34" r="1.9" fill="#0B4F4A" stroke="none"/></svg></span>مشوار معايا</h1><div style="display:flex;align-items:center;gap:8px"><button class="chip" style="border:0;font-family:inherit;color:inherit;cursor:pointer" aria-label="المحفظة" onclick="wal()">الرصيد: <span id="bal"></span> جنيه</button><button class="bellb" aria-label="الوضع الليلي" title="الوضع الليلي" onclick="thToggle()"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 13A8 8 0 1 1 11 4a6.5 6.5 0 0 0 9 9Z"/></svg></button><button class="bellb" aria-label="الإشعارات" onclick="nsh()"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9a6 6 0 0112 0c0 6 2 7 2 7H4s2-1 2-7"/><path d="M10 20a2 2 0 004 0"/></svg><i id="bdg" hidden></i></button></div></div>
 <p class="mu" style="margin:4px 0 0">مشاركة مشاوير القاهرة والجيزة · نسخة أولى مباشرة</p>
 
 <div id="mapw"></div>
