@@ -24,6 +24,25 @@ Object.assign(UI_COPY,{
  'الموقع مقفول من إعدادات المتصفح. افتحه وجرب تاني.':['الموقع مقفول من إعدادات المتصفح. افتحه وجرب تاني.','Location is blocked in the browser settings. Allow it and try again.'],
  'مش قادرين نحدد موقعك دلوقتي. جرب تاني.':['مش قادرين نحدد موقعك دلوقتي. جرب تاني.','We could not detect your location right now. Try again.']
 });
+Object.assign(UI_COPY,{
+ 'استعادة كلمة المرور':['استعادة كلمة المرور','Reset your password'],
+ 'اكتب الإيميل اللي سجلت بيه، وهنبعتلك لينك تعيد منه تعيين كلمة السر.':['أدخل بريدك الإلكتروني المسجل، وسنرسل إليك رابطًا لإعادة تعيين كلمة المرور.','Enter your registered email and we will send you a password reset link.'],
+ 'ابعت لينك الاستعادة':['إرسال رابط الاستعادة','Send reset link'],
+ 'رجوع لتسجيل الدخول':['العودة إلى تسجيل الدخول','Back to sign in'],
+ 'اتبعت اللينك':['تم إرسال الرابط','Link sent'],
+ 'بعتنا لينك إعادة تعيين كلمة السر على ':['أرسلنا رابط إعادة تعيين كلمة المرور إلى ','We sent a password reset link to '],
+ '. افتح إيميلك ودوس على اللينك (لو مش لاقيه، بص في السبام). اللينك صالح لمدة ساعة.':['. افتح بريدك الإلكتروني واضغط على الرابط. إذا لم تجده، راجع مجلد الرسائل غير المرغوب فيها. الرابط صالح لمدة ساعة.','. Open your email and tap the link. If you cannot find it, check the spam folder. The link is valid for one hour.'],
+ 'لينك الاستعادة انتهت صلاحيته أو اتستخدم قبل كده. اطلب لينك جديد.':['انتهت صلاحية رابط الاستعادة أو سبق استخدامه. اطلب رابطًا جديدًا.','This reset link has expired or was already used. Request a new one.'],
+ 'تغيير كلمة السر':['تغيير كلمة المرور','Change password'],
+ 'اكتب كلمة سر جديدة وهتتطبق على حسابك فورًا.':['أدخل كلمة المرور الجديدة وسيتم تطبيقها على حسابك فورًا.','Enter a new password and it will apply to your account right away.'],
+ 'كلمة السر الجديدة':['كلمة المرور الجديدة','New password'],
+ 'تأكيد كلمة السر':['تأكيد كلمة المرور','Confirm password'],
+ 'تأكيد كلمة السر الجديدة':['تأكيد كلمة المرور الجديدة','Confirm new password'],
+ 'نفس كلمة السر':['أعد إدخال كلمة المرور نفسها','Re-enter the same password'],
+ 'كلمتا السر مش متطابقتين.':['كلمتا المرور غير متطابقتين.','The two passwords do not match.'],
+ 'كلمة السر اتغيرت بنجاح.':['تم تغيير كلمة المرور بنجاح.','Password changed successfully.'],
+ 'كلمة السر اتغيرت. تقدر تسجل دخولك بيها من أي جهاز.':['تم تغيير كلمة المرور. يمكنك الآن تسجيل الدخول بها من أي جهاز.','Your password has been changed. You can sign in with it on any device.']
+});
 let UI_LANG = localStorage.getItem('meshwar-language') === 'en' ? 'en' : 'ar';
 const uiEscape = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 const uiKeys = Object.keys(UI_COPY).sort((a,b)=>b.length-a.length);
